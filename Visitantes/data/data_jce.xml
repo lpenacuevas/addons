@@ -1,0 +1,8 @@
+<odoo noupdate="1">
+    <record id="api_url_jce" model="ir.config_parameter">
+        <field name="key">uri</field>
+        <field name="value">http://190.122.98.11:11080/jce/api/citizen/</field>
+    </record>
+</odoo>
+
+
