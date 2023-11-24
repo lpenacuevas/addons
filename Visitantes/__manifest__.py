@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 {
-    'name': "Vistitantes",
+    'name': "Vistitantes ",
 
     'summary': """
        Gestionar las entradas de los visitantes al mitur """,
