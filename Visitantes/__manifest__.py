@@ -10,7 +10,7 @@
         crea label de entrada y conecta con el lector
     """,
 
-    'author': "Mitur",
+    'author': "Mitur ",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
