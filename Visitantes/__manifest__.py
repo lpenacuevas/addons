@@ -4,7 +4,7 @@
     'name': "Vistitantes",
 
     'summary': """
-       Gestionar las entradas de los visitantes al mitur""",
+       Gestionar las entradas de los visitantes al mitur """,
 
     'description': """
         crea label de entrada y conecta con el lector
