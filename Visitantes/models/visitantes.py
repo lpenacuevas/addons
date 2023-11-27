@@ -15,10 +15,37 @@ class visitantes(models.Model):
     _description = 'modelo de visitantes'
 
     _inherit = ["mail.thread", "mail.activity.mixin"]
+
+    _rec_name = "document"
     
+    document = fields.Char("Documento")
+    visitor = fields.Char("Visitante")
+    date = fields.Datetime("Fecha")
+
+    entry_date_time = fields.Datetime(
+        "Hora de entrada",
+        default=lambda self: fields.Datetime.now())
+
+    employee_id = fields.Many2one("res.partner", string="Empleado", required=True)
+
+    #unit = fields.Char(String="Unidad", related="employee_id.unit")
+
+    unit = fields.Char("Unidad")
+
+    floor = fields.Integer("Piso")
+
+
+    #Hora de salida (Campo de salida)
+    # departure_date_time = fields.Datetime(
+    #     "Hora de salida",
+    #     default=lambda self: fields.Datetime.now())
+
+    # Time will be a calculated field between departure_date_time - entry_date_time
+    #time = fields.Datetime()
+
+    #name = fields.Char("Cedula")
     
-    name = fields.Char("Cedula")
-    
+
     
     # Consulta a api
     @api.model
@@ -57,7 +84,7 @@ class visitantes(models.Model):
                        
             # result["name"] = ''
         return result
-
+ 
     # Actualiza los campos
     def _get_updated_vals(self, vals):
         new_vals = {}

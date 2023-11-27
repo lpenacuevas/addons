@@ -14,11 +14,21 @@
                 </header>
                 <sheet>
                     <group name="group_top">
-                        <group name="group_right">
+                        <group name="group_left">
 
-                            <field name="name" />
+                            <field name="document" />
+                            <field name="visitor" />
+                            <field name="date"/>
+                            <field name="entry_date_time" />
+                            <field name="employee_id" />
                             <!-- <field name="employee_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/> -->
                         </group>
+
+                        <group name="group_rigth">
+                            <field name="unit"/>
+                            <field name="floor"/>
+                        </group>
+
                         <!-- <group name="group_left">
                             <field name="effective_date"/>
                             <field name="name" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
@@ -47,7 +57,13 @@
         <field name="model">visitantes</field>
         <field name="arch" type="xml">
             <tree edit="false">
-                <field name="name"/>
+                <field name="document"/>
+                <!-- <field name="visitor"/>
+                <field name="date"/>
+                <field name="entry_date_time"/>
+                <field name="employee_id"/>
+                <field name="unit"/>
+                <field name="floor"/> -->
             </tree>
         </field>
     </record>
