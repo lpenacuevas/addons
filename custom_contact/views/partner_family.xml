@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_family_view_tree" model="ir.ui.view">
+        <field name="name">partner family view tree</field>
+        <field name="model">partner.family</field>
+        <field name="arch" type="xml">
+            <tree string="Composicion Familiar">
+                <field name="name"/>
+                <field name="relationship"/>
+                <field name="gender"/>
+                <field name="age"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="partner_family_view_form" model="ir.ui.view">
+        <field name="name">partner_family_view_form</field>
+        <field name="model">partner.family</field>
+        <field name="arch" type="xml">
+            <form string="partner_family_form">
+                <sheet>
+                    <group string="Composición Familiar">
+                        <group>
+                            <field name="name"/>
+                            <field name="relationship"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="age"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="partner_references_view_form" model="ir.ui.view">
+        <field name="name">partner_references_view_form</field>
+        <field name="model">partner.references</field>
+        <field name="arch" type="xml">
+            <form string="partner_references_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="phone_number"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

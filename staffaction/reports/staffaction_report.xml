@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    region Header-->
+    <template id="staffaction_report_header">
+        <t t-call="web.html_container">
+            <div class="header">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="https://puertoplatadr.com/wp-content/uploads/2022/08/mitur-logo-1.png" alt="Logo"
+                             class="img-thumbnail"/>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h4>Dirección de Recursos Humanos</h4>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <b>FORM-DRH-003</b>
+                                <p>
+                                    <small>Versión: 01/2019</small>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="staffaction_report">
+        <t t-set="doc_list" t-value="list(docs)"/>
+        <t t-call="web.html_container">
+            <div class="article" style="font-family: Calibri, Arial,'Times New Roman'">
+                <div class="oe_structure"/>
+                <!--                                         Segmento contenido                                     -->
+                <div class="container-fluid mt-4 lh-sm">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <small>Impreso por:
+                                <span t-field="user.name"/>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" style="padding: 8px 0px 8px 0px">
+                        <div class="col-12">
+                            <h4 class="text-center">Formulario de Acción de Personal</h4>
+                        </div>
+                    </div>
+                    <div class="container border border-dark">
+                        <div class="m-2">
+                            <div class="row mb-1 border ">
+                                <div class="col-8 border-right">
+                                    <div class="row text-center">
+                                        <div class="col-3">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <b>1 .Código:</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span t-esc="doc.employee_id.pin"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <b>2. Identificación:</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <t t-if="doc.employee_id.identification_id">CEDULA DE IDENTIDAD Y
+                                                        ELECTORAL
+                                                    </t>
+                                                    <t t-if="doc.employee_id.passport_id">PASAPORTE</t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <b>3. Documento No:</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <t t-if="doc.employee_id.identification_id">
+                                                        <span t-esc="doc.employee_id.identification_id"/>
+                                                    </t>
+                                                    <t t-if="doc.employee_id.passport_id">
+                                                        <span t-esc="doc.employee_id.passport_id"/>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <b>No. Acción:</b>
+                                        </div>
+                                        <div class="col-5" style="font-size:15px">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <b>Fecha Acción:</b>
+                                        </div>
+                                        <div class="col-5" style="font-size:15px">
+                                            <span t-field="doc.date_staff"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <b>Efectividad:</b>
+                                        </div>
+                                        <div class="col-5" style="font-size:15px">
+                                            <span t-field="doc.effective_date"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border">
+                                <div class="col-4 border-right">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>4. Apellidos:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span t-field="doc.employee_id.last_name"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 border-right ">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>5. Nombres:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span t-field="doc.employee_id.name"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 ">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>6. Nacionalidad:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 12px 0px 12px 0px">
+                                        <div class="col-12">
+                                            <span t-field="doc.employee_id.country_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2 border ">
+                                <div class="col-6 border-right">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>7. Cargo:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span t-field="doc.jobs_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 border-right ">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>8. Fecha de Ingreso:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span t-field="doc.employee_id.enter_date"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>9. Sexo:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 12px 0px 12px 0px">
+                                        <div class="col-12">
+                                            <span t-field="doc.employee_id.gender"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <section class="row mb-1 border">
+                                <section class="col-6 border-right">
+                                    <section class="row">
+                                        <section class="col-12">
+                                            <strong>10. Unidad Administrativa:</strong>
+                                        </section>
+                                    </section>
+                                    <section class="row" style="padding: 15px 0px 15px 0px">
+                                        <section class="col-12">
+                                            <span t-field="doc.departments_id.parent_id"/>
+                                        </section>
+                                    </section>
+                                </section>
+                                <section class="col-6">
+                                    <section class="row">
+                                        <section class="col-12">
+                                            <strong>11. Unidad Dependiente:</strong>
+                                        </section>
+                                    </section>
+                                    <section class="row" style="padding: 15px 0px 15px 0px">
+                                        <section class="col-12">
+                                            <span t-field="doc.departments_id"/>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                            <div class="row border">
+                                <div class="col-6">
+                                    <b>12. Sueldo Actual:</b>
+                                    <p></p>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <b>13. Antiguedad de servicio en el estado:</b>
+                                        </div>
+                                        <div class="col-6">
+                                            <t t-esc="doc.employee_id.government_years_total"/>
+                                            Año(s) y
+                                            <t t-esc="doc.employee_id.government_months_total"/>
+                                            Mes(es)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <b>
+                                                Ministerio de turismo:
+                                            </b>
+                                        </div>
+                                        <div class="col-6">
+                                            <span>
+                                                <t t-esc="doc.employee_id.years_passed"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.months_passed"/>
+                                                Mes(es)
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <b>
+                                                Otras instituciones:
+                                            </b>
+                                        </div>
+                                        <div class="col-6">
+                                            <span>
+                                                <t t-esc="doc.employee_id.other_institution_year"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.other_institution_month"/>
+                                                Mes(es)
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-1 border ">
+                                <div class="col-12 ">
+                                    <b>14. Descripcion de acción de personal:</b>
+                                </div>
+                            </div>
+                            <div class="row border mb-1" style="padding: 5px 0px 5px 0px">
+                                <div class="col-12 ">
+                                    <span t-field="doc.action_type_id.name"/>
+                                </div>
+                            </div>
+                            <div class="row border mb-1">
+                                <div class="col-12 ">
+                                    <b>15. Motivación de la acción:</b>
+                                </div>
+                            </div>
+                            <dib class="row border" style="padding: 5px 0px 5px 0px">
+                                <div class="col-12 ">
+                                    <span t-field="doc.name"/>
+                                </div>
+                            </dib>
+                            <div class="row border ">
+                                <div class="col-12 ">
+                                    <b>16. Observaciones:</b>
+                                </div>
+                            </div>
+                            <div class="row border  mb-1" style="padding: 5px 0px 5px 0px; font-size:14px">
+                                <div class="col-12 ">
+                                    <span t-field="doc.action_motivation"/>
+                                </div>
+                            </div>
+                            <div class="row mb-1 border ">
+                                <div class="col-12">
+                                    <b>Aprobado</b>
+                                </div>
+                            </div>
+                            <div class="row text-center border " style="padding: 25px 0px 25px 0px">
+                                <div class="col-12">
+                                    <b>Lorenzo Antonio</b>
+                                    <hr/>
+                                    <p>Directora de recursos humanos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr/>
+                            <b>Creado por :
+                                <span t-field="doc.create_uid"/>
+                            </b>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <!--                                         Segmento contenido                                     -->
+            </div>
+        </t>
+    </template>
+
+
+    <template id="staffaction_articule_report">
+        <main>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="staffaction.staffaction_report_header"/>
+                <t t-call="staffaction.staffaction_report"/>
+            </t>
+        </main>
+    </template>
+
+    <record id="paperformat_staff" model="report.paperformat">
+        <field name="name">Custom Paper</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="articule_report_view_form" model="ir.actions.report">
+        <field name="name">Reporte de Accion</field>
+        <field name="model">staff.action</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_file">staffaction.staffaction_report</field>
+        <field name="report_name">staffaction.staffaction_articule_report</field>
+        <field name="binding_model_id" ref="model_staff_action"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="staffaction.paperformat_staff"/>
+    </record>
+
+
+</odoo>

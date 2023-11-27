@@ -1,0 +1,64 @@
+<odoo>
+    <record id="view_type_condicion" model="ir.ui.view">
+        <field name="name">type.condition.form</field>
+        <field name="model">condition.types</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--list view -->
+    <record id="view_tree_condition" model="ir.ui.view">
+        <field name="name">type.condition.list</field>
+        <field name="model">condition.types</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <!-- tipo empleado -->
+    <record id="view_type_employee" model="ir.ui.view">
+        <field name="name">type.employee.form</field>
+        <field name="model">employee.types</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--list view -->
+    <record id="view_tree_employee_type" model="ir.ui.view">
+        <field name="name">type.employee.list</field>
+        <field name="model">employee.types</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

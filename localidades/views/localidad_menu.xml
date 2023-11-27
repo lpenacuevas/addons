@@ -1,0 +1,38 @@
+<odoo>
+<menuitem id="menu_localidad" name="localidades" web_icon="localidades,static/description/icon.png"/>
+
+<record id="action_localidad"  model="ir.actions.act_window">
+    <field name="name">Localidades</field>
+    <field name="res_model">localidades.localidades</field>
+    <field name="view_mode">tree,form,kanban</field>
+</record>
+
+<act_window id="action_piso" name="Pisos" res_model="localidad.piso" view_mode="tree,form"/>
+
+<menuitem id="menu_action_localidad"
+    name="Localidades"
+    parent="menu_localidad"    
+    action="action_localidad"
+    />
+    
+<menuitem
+    id="menu_action_piso"
+    name="Pisos"
+    action="action_piso"
+    parent="menu_localidad"    
+   />
+
+ 
+<!-- añadir una opcion a action menu
+<record id="action_sender_message" model="ir.actions.act_window">
+    <field name="name">Send Message</field>
+    <field name="res_model">localidades.localidades</field>
+    <field name="view_mode">form</field>
+    <field name="binding_model_id" ref="model_localidades_localidades"/>
+    <field name="binding_view_types">form,list</field>
+</record> -->
+
+
+
+
+</odoo>

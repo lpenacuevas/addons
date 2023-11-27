@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_cargo_viatico_form" model="ir.ui.view">
+        <field name="name">viatico grupo form</field>
+        <field name="model">cargo.viatico</field>
+        <field name="arch" type="xml">
+            <form string="Group">
+                <header>
+                    <!--button opcional  -->
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="name"/>
+                        </group>
+                        <group name="group_left">
+                            <field name="desayuno"/>
+                            <field name="almuerzo"/>
+                            <field name="cena"/>
+                            <field name="alojamiento"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_cargo_viatico_tree" model="ir.ui.view">
+        <field name="name">viatico grupo tree</field>
+        <field name="model">cargo.viatico</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="desayuno"/>
+                <field name="almuerzo"/>
+                <field name="cena"/>
+                <field name="alojamiento"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

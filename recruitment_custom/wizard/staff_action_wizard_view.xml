@@ -1,0 +1,11 @@
+<record id="view_mi_model_wizard_form" model="ir.ui.view">
+    <field name="name">mi.modelo.wizard.form</field>
+    <field name="model">mi.modelo.wizard</field>
+    <field name="arch" type="xml">
+        <form>
+            <field name="mi_campo" readonly="1"/>
+            <!-- El atributo readonly="1" hace que el campo sea de solo lectura -->
+            <!-- Otros campos del formulario del wizard -->
+        </form>
+    </field>
+</record>

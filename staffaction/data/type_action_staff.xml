@@ -1,0 +1,43 @@
+<odoo noupdate="1">
+
+    <!-- Tipo Accion Ingreso-->
+    <!-- <record id="tipo_accion_value" model="action.type">
+        <field name="name">INGRESO</field>
+        <field name="id_mrh">1</field>
+    </record> -->
+    <!-- <record id="tipo_accion_detail_1" model="action.detail">
+        <field name="name">CONTRATO</field>
+        <field name="id_mrh">3</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_2" model="action.detail">
+        <field name="name">DECRETO</field>
+        <field name="id_mrh">10</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_3" model="action.detail">
+        <field name="name">TRASLADO DE CARRERA</field>
+        <field name="id_mrh">11</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_4" model="action.detail">
+        <field name="name">COMISIÓN DE SERVICIO</field>
+        <field name="id_mrh">12</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_5" model="action.detail">
+        <field name="name">CONCURSO INTERNO</field>
+        <field name="id_mrh">13</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_6" model="action.detail">
+        <field name="name">CONCURSO EXTERNO</field>
+        <field name="id_mrh">14</field>
+        <field name="action_type_id">18</field>
+    </record>
+    <record id="tipo_accion_detail_7" model="action.detail">
+        <field name="name">PERSONAL MILITAR</field>
+        <field name="id_mrh">86</field>
+        <field name="action_type_id">18</field>
+    </record> -->
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+    <record id="partner_academy_record_view_form" model="ir.ui.view">
+        <field name="name">partner_academy_record_view_form</field>
+        <field name="model">partner.academy.record</field>
+        <field name="arch" type="xml">
+            <form string="partner_family_form">
+                <sheet>
+                    <group>
+                        <field name="level"/>
+                        <field name="major" attrs="{'invisible' : [('level', '!=', 'university')]}"/>
+                        <field name="post_grade" attrs="{'invisible' : [('level', '!=', 'post-grade')]}"/>
+                        <field name="master" attrs="{'invisible' : [('level', '!=', 'master')]}"/>
+                        <field name="doctorate" attrs="{'invisible' : [('level', '!=', 'doctorate')]}"/>
+                    </group>
+                    <group string="Estado">
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

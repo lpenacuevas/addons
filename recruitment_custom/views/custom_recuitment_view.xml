@@ -1,0 +1,78 @@
+<odoo>
+    <record id="recuiment_form_extended" model="ir.ui.view">
+        <field name="name">recuitment.view.form.extended</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <group name="group_top">
+                    <field name="grupo_ocupacional"/>
+                    <field name="group_viatico"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="custom_hr_applicant_view_form" model="ir.ui.view">
+        <field name="name">custom hr applicant view form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='create_employee_from_applicant']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='archive_applicant']" position="after">
+                <button type="object" name="open_wizar" string="Novedad" class="btn-primary"/>
+                <field name="is_created" invisible="1"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/label[hasclass('oe_edit_only')]" position="replace">
+                <label for="job_id" class="oe_edit_only"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/h1/field[@name='name']" position="replace">
+                <h1><field name="job_id" options="{'no_create': True, 'no_create_edit':True}"/></h1>
+            </xpath>
+            <xpath expr="//sheet/group/group/field[@name='job_id']" position="replace">
+                    <field name="name" string="Asunto" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_recruitment.action_hr_job">
+        <field name="name">Vacantes</field>
+    </record>
+
+    <record id="recruitment_kanban_extended" model="ir.ui.view">
+        <field name="name">recruitment.view.kanban.extended</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_card_header')]/div[hasclass('o_kanban_card_header_title')]/div[hasclass('o_primary')]"
+                   position="after">
+                <field name="group_viatico"/>
+            </xpath>
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="recuiment_tree_extended" model="ir.ui.view">
+        <field name="name">recuiment.view.tree.extended</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_tree"/>
+        <field name="arch" type="xml">
+            <field name="department_id" position="before">
+                <field name="grupo_ocupacional" widget="many2one_tags"/>
+            </field>
+            <field name="grupo_ocupacional" position="after">
+                <field name="group_viatico" widget="many2one_tags"/>
+            </field>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

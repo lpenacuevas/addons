@@ -1,0 +1,32 @@
+<odoo>
+
+
+
+    <!-- <menuitem id="menu_first_condition_type" name="types">
+        <menuitem id="model_menu_condition_type" action="condition_type"/>
+        <menuitem id="model_menu_employee_type" action="employee_type"/>
+    </menuitem> -->
+
+
+    <record id="condition_type_action" model="ir.actions.act_window">
+        <field name="name">Tipo de condicion</field>
+        <field name="res_model">condition.types</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <menuitem id="menu_condicion_group" name="tipo condicion" action="condition_type" parent="hr.menu_human_resources_configuration"/> -->
+    <record id="employee_type_action" model="ir.actions.act_window">
+        <field name="name">Tipo de empleado</field>
+        <field name="res_model">employee.types</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <menuitem id="menu_tipo_group" name="tipo empleado" action="employee_type" parent="hr.menu_human_resources_configuration"/> -->
+
+
+    <menuitem id="menu_types_configurations" name="Tipos" parent="hr.menu_human_resources_configuration">
+        <menuitem id="model_menu_action_type" action="condition_type_action"/>
+        <menuitem id="model_menu_action_detail" action="employee_type_action"/>
+    </menuitem>
+</odoo>
+  

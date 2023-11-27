@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="user_simulation_wizard_view" model="ir.ui.view">
+            <field name="name">User Simulation</field>
+            <field name="model">user.simulation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="User Simulation">
+                    <label for="user_id" />
+                    <field
+                        name="user_id"
+                        widhet="many2one"
+                        context="{'user_simulation_context':True}"
+                    />
+                    <footer>
+                        <button
+                            string="Login"
+                            name="login_simulation"
+                            type="object"
+                            class="btn-primary"
+                        />
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_user_simulation" model="ir.actions.act_window">
+            <field name="name">User Simulation</field>
+            <field name="res_model">user.simulation.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="user_simulation_wizard_view" />
+            <field name="target">new</field>
+<!--            <field name="context"></field>-->
+        </record>
+
+    </data>
+</odoo>

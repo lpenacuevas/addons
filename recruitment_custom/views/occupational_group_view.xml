@@ -1,0 +1,93 @@
+<odoo>
+  <record id="view_occupational_group_form" model="ir.ui.view">
+    <field name="name">occupational group form</field>
+    <field name="model">occupational.group</field>
+    <field name="arch" type="xml">
+      <form string="Group">
+        <header>
+          <!-- <field name="state" invisible="True" />
+            <button name="button_done" type="object" string="Return Books" attrs="{'invisible':[('state', 'in', ['new', 'done', 'cancel'])]}" class="oe_highlight"/> -->
+        </header>
+        <sheet>
+          <group name="group_top">
+            <group name="group_right">
+              <field name="name"/>
+              <field name="nivel"/>
+              <field name="ponderacion"/>
+            </group>
+          </group>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="activity_ids" widget="mail_activity"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+      </form>
+    </field>
+  </record>
+  <record id="view_occupational_group_tree" model="ir.ui.view">
+    <field name="name">occupational group tree</field>
+    <field name="model">occupational.group</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="nivel"/>
+        <field name="ponderacion"/>
+      </tree>
+    </field>
+  </record>
+  <!-- custom resume line -->
+  <!-- <record id="custom_hr_resume_form_line" model="ir.ui.view">
+    <field name="name">custom resume form line</field>
+    <field name="model">hr.resume.line</field>
+    <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='line_type_id']" position="before">
+        <field name="cargo" string="Cargo"/>
+      </xpath>
+      <xpath expr="//field[@name='date_start']" position="before">
+        <field name="tipo_institucion" string="Tipo institucion"/>
+      </xpath>
+      <xpath expr="//field[@name='date_end']" position="after">
+        <field name="telefono" string="Telefono"/>
+      </xpath>
+      <xpath expr="//field[@name='display_type']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+    </field>
+  </record> -->
+</odoo>
+
+<!--<xpath expr="//field[@name='attendance_ids']" position="attributes">
+   <attribute name="invisible">True</attribute>
+</xpath>
+
+<xpath expr="//field[@name='localidad_id']" position="after">
+    <field name="piso_id"/>
+    
+    
+    
+      <field name="labor_id">
+                <tree editable="bottom">                
+                  <field name="name" />
+                </tree>
+              </field>
+
+
+                <xpath expr="//notebook" position="replace"> 
+          <notebook>
+            <page name="labor" string="Horas de labor">
+              <field name="labor_ids">
+                <tree editable="bottom">
+                  <field name="name"/>      
+                  <field name="hour_from" string="Trabajar desde" widget="float_time"/>
+                  <field name="hour_to" string="Trabajar hasta" widget="float_time"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </xpath>
+
+
+
+     -->

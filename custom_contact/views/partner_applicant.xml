@@ -1,0 +1,263 @@
+<odoo>
+
+    <!-- Inherit views from Partner -->
+
+    <!-- Partner Tree View -->
+    <record id="view_applicant_tree" model="ir.ui.view">
+        <field name="name">res.applicant.tree</field>
+        <field name="model">partner.applicant</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Contacts" sample="1" multi_edit="1">
+                <field name="display_name" string="Nombre Completo"/>
+                <field name="phone" class="o_force_ltr" optional="show"/>
+                <field name="email" optional="show"/>
+                <field name="city" optional="show" string="Ciudad"/>
+                <field name="state_id" optional="hide" readonly="1"/>
+                <field name="country_id" optional="show" readonly="1"/>
+                <field name="category_id" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Partner Form View -->
+    <record id="view_applicant_form" model="ir.ui.view">
+        <field name="name">res.applicant.form</field>
+        <field name="model">partner.applicant</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Candidatos">
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="avatar_128" invisible="1"/>
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                           options='{"preview_image": "avatar_128"}'/>
+                    <div class="oe_title mb24">
+                        <field name="active" invisible="1"/>
+                        <h1>
+                            <field id="individual" class="text-break" name="name" default_focus="1"
+                                   readonly="1" />
+                        </h1>
+                        <div class="oe_edit_only">
+                            <group>
+                                <field
+                                        name="firstname"
+                                        attrs="{'required': [('lastname', '=', False)]}"
+                                />
+                                <field
+                                        name="lastname"
+                                        attrs="{'required': [('firstname', '=', False)]}"
+                                />
+                            </group>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <field name="type"
+                                       class="font-weight-bold"/>
+                            </span>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Calle..." class="o_address_street"/>
+                                <field name="street2" placeholder="Calle 2..." class="o_address_street"/>
+                                <field name="city" placeholder="Ciudad" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="Estado"
+                                       options="{'no_open': True, 'no_quick_create': True}"
+                                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="C.P." class="o_address_zip"/>
+                                <field name="country_id" placeholder="País" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="reference_spot" placeholder="Punto de Referencia"/>
+                            </div>
+                            <field name="res_partner_id"/>
+                        </group>
+                        <group>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}"/>
+                            <field name="website" string="Website" widget="url"
+                                   placeholder="e.g. https://www.odoo.com"/>
+                            <field name="title" options='{"no_open": True}' placeholder="e.g. Mister"/>
+                            <field name="active_lang_count" invisible="1"/>
+                            <label for="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"/>
+                            <div class="o_row" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}">
+                                <field name="lang"/>
+                                <button
+                                        type="action"
+                                        name="%(base.res_lang_act_window)d"
+                                        class="btn-sm btn-link mb4 fa fa-globe"
+                                        aria-label="More languages"
+                                        groups="base.group_system"
+                                        title="More languages"
+                                />
+                            </div>
+                            <field name="category_id" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="job_request" string="Informacion Personal">
+                            <group>
+                                <group name='group-left' string="Datos personales">
+                                    <field name="birthday"/>
+                                    <field name="nationality_id"/>
+                                    <field name="gender"/>
+                                    <field name="identification_id"/>
+                                    <field name="passport_id"/>
+                                    <field name="marital_status"/>
+                                </group>
+                                <group name="group-right" string="Informacion de Emergencia">
+                                    <field name="blood_type"/>
+                                    <field name="have_any_illness"/>
+                                    <field name="have_any_allergy"/>
+                                </group>
+                                <group string="Contacto de Emergencia">
+                                    <field name="emergency_contact"/>
+                                    <field name="emergency_contact_phone"/>
+                                    <field name="emergency_contact_relationship"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="partner_family" string="Composición Familiar">
+                            <field name="partner_family_ids" mode="kanban" context="{'default_name': None}">
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="relationship"/>
+                                    <field name="gender"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-att-class="oe_kanban_global_click">
+                                                <div class="o_kanban_image">
+                                                    <img alt="Contact image"
+                                                         t-att-src="kanban_image('partner.family', 'avatar_128', record.id)"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <field name="name"/>
+                                                    <div t-if="record.relationship">
+                                                        <field name="relationship"/>
+                                                    </div>
+                                                    <div t-if="record.gender">
+                                                        <field name="gender"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page string="Experiencia Laboral" name="job_experience">
+                            <field name="partner_job_ids" mode="tree">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="job_position"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Formacion Academica" name="academy_records">
+                            <field name="partner_academy_ids" mode="tree">
+                                <tree>
+                                    <field name="level"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Formacion Complementaria" name="complementary_experience">
+                            <field name="partner_complementary_ids" mode="tree">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="school"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Habilidades" name="skills">
+                            <div class="o_hr_skills_editable o_hr_skills_group o_group_skills col-lg-5 d-flex flex-column">
+                                <separator string="Formacion Academica"/>
+                                <field mode="tree" name="partner_skill_ids" widget="hr_skills">
+                                    <tree>
+                                        <field name="skill_type_id" invisible="1"/>
+                                        <field name="skill_id"/>
+                                        <field name="skill_level_id"/>
+                                        <field name="level_progress" widget="progressbar"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                        <page string="Referencias Personales" name="partner_references">
+                            <field name="partner_references_ids" mode="tree">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="phone_number"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Partner Kanban View -->
+    <record model="ir.ui.view" id="res_applicant_kanban_view">
+        <field name="name">res.applicant.kanban</field>
+        <field name="model">partner.applicant</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" sample="1">
+                <field name="id"/>
+                <field name="color"/>
+                <field name="display_name"/>
+                <field name="title"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="zip"/>
+                <field name="city"/>
+                <field name="country_id"/>
+                <field name="mobile"/>
+                <field name="state_id"/>
+                <field name="category_id"/>
+                <field name="avatar_128"/>
+                <field name="type"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <t>
+                                <div class="o_kanban_image_fill_left o_kanban_image_full"
+                                     t-attf-style="background-image: url(#{kanban_image('partner.applicant', 'avatar_128', record.id.raw_value)})"
+                                     role="img"/>
+                            </t>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="display_name"/>
+                                </strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li t-if="record.city.raw_value or record.country_id.raw_value">
+                                        <t t-if="record.city.raw_value">
+                                            <field name="city"/>
+                                            <t t-if="record.country_id.raw_value">,</t>
+                                        </t>
+                                        <t t-if="record.country_id.raw_value">
+                                            <field name="country_id"/>
+                                        </t>
+                                    </li>
+                                    <li t-if="record.email.raw_value" class="o_text_overflow">
+                                        <field name="email"/>
+                                    </li>
+                                </ul>
+                                <div class="o_row">
+                                    <span class="oe_kanban_partner_links"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

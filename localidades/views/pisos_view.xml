@@ -1,0 +1,39 @@
+<odoo>
+ <!--Vista de form-->
+    <record id="view_piso_form" model="ir.ui.view">
+        <field name="name">piso form</field>
+        <field name="model">localidad.piso</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right ">
+                        <field name="name"/>
+                        </group>                        
+                        <group name="group_left">
+                        <field name="numero"/> 
+                        </group>                                    
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/> 
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/> 
+                </div> 
+            </form>
+        </field>
+    </record>
+     <!--Vista de lista-->
+    <record id="view_tree_piso" model="ir.ui.view">    
+        <field name="name">pisos List</field>
+        <field name="model">localidad.piso</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="numero"/>               
+            </tree>    
+        </field>
+    </record>
+</odoo>

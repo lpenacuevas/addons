@@ -1,0 +1,141 @@
+<odoo>
+    <!--Vista de form-->
+    <record id="view_staff_form" model="ir.ui.view">
+        <field name="name">staff.action.form</field>
+        <field name="model">staff.action</field>
+        <field name="arch" type="xml">
+            <form string="Accion de personal" edit="false">
+                <header>
+                    <button name="staff_action_done" type="object" string="Confirmar" class="btn btn-primary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
+                    <button name="staff_action_cancel" type="object" string="Cancelar" class="btn btn-secondary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
+                    <field name="state" invisible="True"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': False, 'fold_field': 'fold'}"/>
+                    <!-- <button name="button_done" type="object" string="Return" states="open" class="oe_highlight"/> -->
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="date_staff"/>
+                            <field name="action_type_id" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="employee_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+                        </group>
+                        <group name="group_left">
+                            <field name="effective_date"/>
+                            <field name="name" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="departments_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="jobs_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+                        </group>
+                    </group>
+                    <group name="group_bottom">
+                        <field name="action_motivation"/>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Detalle de accion form -->
+    <record id="view_action_detail_form" model="ir.ui.view">
+        <field name="name">action_detail.action.form</field>
+        <field name="model">action.detail</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Accion">
+                <header>
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="action_type_id" widget="many2one_tags"/>
+                        </group>
+                        <group name="group_left">
+                            <field name="name" string="Detalle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--list view -->
+    <record id="view_tree_staffaction" model="ir.ui.view">
+        <field name="name">staffaction.List</field>
+        <field name="model">staff.action</field>
+        <field name="arch" type="xml">
+            <tree edit="false">
+                <field name="employee_id"/>
+                <field name="date_staff"/>
+                <field name="effective_date"/>
+                <field name="state"/>
+                <field name="action_type_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <!--list view detalle de accion-->
+    <record id="view_tree_details_action" model="ir.ui.view">
+        <field name="name">Details action list</field>
+        <field name="model">action.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="action_type_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tipo_accion_form" model="ir.ui.view">
+        <field name="name">tipo de accion</field>
+        <field name="model">action.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="name" string="Tipo de accion"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+
+<!--                    <notebook>-->
+<!--                        <page string="Vacaciones">-->
+<!--                            <group>-->
+<!--                                <group name="vacation_left" string="Informacion de vacaciones">-->
+<!--                                    <field name="vacation_start"/>-->
+<!--                                    <field name="vacation_end"/>-->
+<!--                                    <field name="vacation_date_return"/>-->
+<!--                                    <field name="remaining_days" readonly="1"/>-->
+<!--                                </group>-->
+<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Promociones">-->
+<!--                            <group>-->
+<!--                                <group name="promotion_left" string="Informacion de promocion">-->
+<!--                                    <field name="new_department_id"/>-->
+<!--                                    <field name="new_position_id"/>-->
+<!--&lt;!&ndash;                                    <field name="new_salary"/>&ndash;&gt;-->
+<!--                                </group>-->
+<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Traslados" attrs="{'invisible': [('action_type_id', '!=', 6)]}">-->
+<!--                            <group>-->
+<!--                                <group name="transfer_left" string="Informacion de traslados" required="1">-->
+<!--                                    <field name="new_location_id"/>-->
+<!--                                    <field name="new_department_id"/>-->
+<!--                                    <field name="new_position_id"/>-->
+<!--&lt;!&ndash;                                    <field name="new_salary"/>&ndash;&gt;-->
+<!--                                </group>-->
+<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->

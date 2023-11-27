@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="staff_group_admin" model="res.groups">
+        <field name="name">Administrador de accion de personal</field>
+    </record>
+</odoo>

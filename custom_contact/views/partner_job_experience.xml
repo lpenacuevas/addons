@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_job_experience_view_form" model="ir.ui.view">
+        <field name="name">partner_job_experience_view_form</field>
+        <field name="model">partner.job.experience</field>
+        <field name="arch" type="xml">
+            <form string="partner_family_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="job_position"/>
+                        <field name="salary"/>
+                    </group>
+                    <group string="Periodo Laborado:">
+                        <field name="enter_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="partner_complementary_experience_view_form" model="ir.ui.view">
+        <field name="name">partner_complementary_experience_view_form</field>
+        <field name="model">partner.complementary.experience</field>
+        <field name="arch" type="xml">
+            <form string="partner_family_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="school"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

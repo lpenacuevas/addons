@@ -1,0 +1,52 @@
+<odoo>
+    <record id="localidad_department_form_extended" model="ir.ui.view">
+        <field name="name">localidad.department.view.form.extended</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">       
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="abreviatura"/>  
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="before">
+                <field name="piso_id"/>
+            </xpath>
+            <xpath expr="//field[@name='abreviatura']" position="after">
+                <field name="localidad_id"/>
+            </xpath>       
+        </field>
+    </record>
+
+    <record id="localidad_department_kamban_extended" model="ir.ui.view">
+        <field name="name">localidad.department.view.kamban.extended</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id"  ref="hr.hr_department_view_kanban"/>
+        <field name="arch" type="xml">
+          <xpath expr="//t[@t-name='kanban-box'] //field[@name='company_id']" position="replace">
+            <span><field name="manager_id"/></span>
+          </xpath> 
+        </field>
+    </record>
+
+     <record id="localidad_department_tree_extended" model="ir.ui.view">
+        <field name="name">localidad.department.view.tree.extended</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="arch" type="xml">
+          <field name="company_id" position="replace"> 
+           <field name="localidad_id" widget="many2one_tags" />
+          </field> 
+           <field name="total_employee" position="before">
+           <field name="piso_id" />
+          </field> 
+           <field name="display_name" position="after">
+           <field name="abreviatura" />
+          </field> 
+        </field>
+    </record>
+</odoo>
+<!--              <xpath expr="//field[@name='parent_id']" position="after">
+    <field name="localidad_id"/>
+</xpath>
+
+<xpath expr="//field[@name='localidad_id']" position="after">
+    <field name="piso_id"/> -->
