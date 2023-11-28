@@ -1,0 +1,48 @@
+<odoo>
+    <menuitem id="menu_staffaction" name="Accion de Personal" web_icon="staffaction,static/description/icon.png"/>
+
+
+    <record id="action_staffaction" model="ir.actions.act_window">
+        <field name="name">Empleados</field>
+        <field name="res_model">staff.action</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_applicant_action" model="ir.actions.act_window">
+        <field name="name">Candidatos</field>
+        <field name="res_model">applicant.action</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_type" model="ir.actions.act_window">
+        <field name="name">Action type</field>
+        <field name="res_model">action.type</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_detail" model="ir.actions.act_window">
+        <field name="name">Action detail</field>
+        <field name="res_model">action.detail</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_staff_stage" model="ir.actions.act_window">
+        <field name="name">Estado de Accion</field>
+        <field name="res_model">staff.action.stage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_action_staffaction" name="Empleados" parent="menu_staffaction" action="action_staffaction" sequence="10" />
+
+    <menuitem id="menu_action_applicantaction" name="Candidatos" parent="menu_staffaction" action="action_applicant_action" sequence="11" />
+    <!--Configuracion -->
+    <menuitem id="menu_acction_configurations" name="Configuracion" parent="menu_staffaction" sequence="13">
+        <menuitem id="menu_first_action_type" name="Accion">
+            <menuitem id="model_menu_action_type" action="action_type"/>
+            <menuitem id="model_menu_action_detail" action="action_detail"/>
+        </menuitem>
+        <menuitem id="menu_second_action_stage" name="Estado">
+            <menuitem id="menu_staff_stage" action="action_staff_stage"/>
+        </menuitem>
+    </menuitem>
+</odoo>

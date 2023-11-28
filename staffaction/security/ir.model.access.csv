@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_staff_action_user,staffActionUser,model_staff_action,base.group_user,1,1,1,1
+access_action_type_user,actionTypeUser,model_action_type,base.group_user,1,1,1,1
+access_action_detail_user,actionDetailUser,model_action_detail,base.group_user,1,1,1,1
+access_applicant_action_user,applicantActionUser,model_applicant_action,base.group_user,1,1,1,1
+access_action_stage_user,actionStagesUser,model_staff_action_stage,base.group_user,1,1,1,1

@@ -1,0 +1,19 @@
+<odoo>
+    <record id="action_posiciones_group" model="ir.actions.act_window">
+        <field name="name">Catalogo de Viaticos</field>
+        <field name="res_model">cargo.viatico</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_ocupational_group" model="ir.actions.act_window">
+        <field name="name">Grupo Ocupacionales</field>
+        <field name="res_model">occupational.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_posiciones_group" name="Parametros de Cargos" parent="hr_recruitment.menu_hr_recruitment_configuration">
+        <menuitem id="model_menu_action_ocupational" action="action_ocupational_group"/>
+        <menuitem id="model_menu_action_position" action="action_posiciones_group"/>
+    </menuitem>
+
+</odoo>

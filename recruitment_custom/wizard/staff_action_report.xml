@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="staff_action_report" model="ir.ui.view">
+        <field name="name">Reporte accion de personal</field>
+        <field name="model">wizard.custom</field>
+        <field name="inherit_id" ref="recruitment_custom.wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/footer" position="inside">
+                <!-- Add your fields or attributes here -->
+                <button name="print_staff_action"
+                        type="object"
+                        string="Imprimir novedad"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('is_valid', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

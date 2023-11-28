@@ -1,0 +1,116 @@
+<odoo>
+ <!--Vista de form-->
+    <record id="view_localidad_form" model="ir.ui.view">
+        <field name="name">localidad.form</field>
+        <field name="model">localidades.localidades</field>
+        <field name="arch" type="xml">
+            <form string="Localidad">
+                <header>
+            <!-- <field name="state" invisible="True" />
+            <button name="button_done" type="object" string="Return Books" attrs="{'invisible':[('state', 'in', ['new', 'done', 'cancel'])]}" class="oe_highlight"/> -->
+                </header>
+                <sheet>
+                    <group name="group_top">  
+                        <group name="group_right">
+                           <field name="name"/>
+                           <field name="direccion"/>                                     
+                        </group>                  
+                        <group name="group_left">
+                           <field name="telefono"/>  
+                        </group>
+                    </group>                    
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/> 
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/> 
+                </div> 
+            </form>
+        </field>
+    </record>
+     <!--Vista de lista-->
+    <record id="view_tree_localidad" model="ir.ui.view">    
+        <field name="name">localidad.List</field>
+        <field name="model">localidades.localidades</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="direccion"/>
+                <field name="telefono"/>
+                <field name="num_localidades" sum="Num. localidades" />
+            </tree>    
+        </field>
+    </record> 
+<!-- vista kanban -->
+<record id="view_kanban_localidad" model="ir.ui.view">
+        <field name="name">localidad.kanban</field>
+        <field name="model">localidades.localidades</field>
+        <field name="arch" type="xml">
+            <kanban create="true" class="o_modules_kanban">
+                    <field name="name"/>
+                    <field name="direccion"/>
+                    <field name="telefono"/>                   
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown">
+                            <!-- Top-right drop down menu ... 
+                            <a class="dropdown-toggle btn"
+role="button" data-toggle="dropdown"
+title="Dropdown menu" href="#">
+<span class="fa fa-ellipsis-v" />
+</a>
+<div class="dropdown-menu" role="menu">
+
+<t t-if="widget.editable">
+ <a role="menuitem" type="edit"
+    class="dropdown-item">Edit</a>
+</t>
+
+<t t-if="widget.deletable">
+ <a role="menuitem" type="delete"
+    class="dropdown-item">Delete</a>
+</t>
+
+<div role="separator" class=
+ "dropdown-divider"/>
+
+<ul class="oe_kanban_colorpicker"
+Designing kanban cards 387
+ data-field="color" />
+
+<a t-if="record.state != 'done'"
+  role="menuitem" class="dropdown-item"
+  name="button_done" type="object">Set
+  as Done</a>
+                            -->
+                            
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_title">
+                        <!-- Title area ... -->
+                                     <strong><field name="name" /></strong>
+                                </div>
+                                <div class="o_kanban_record_body">
+                        <!-- Other content area  ... -->
+                                    <field name="direccion"/>
+                                </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_right">
+                            <!-- Right side footer... -->
+                                    <field name="telefono"/>
+                                </div>
+             <!--<div class="oe_kanban_bottom_left">
+              Left side footer... 
+            </div>-->           
+                            </div>
+                            <div class="oe_clear"/>
+                            </div> <!-- oe_kanban_content -->
+                        </div> <!-- oe_kanban_global_click -->
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
+

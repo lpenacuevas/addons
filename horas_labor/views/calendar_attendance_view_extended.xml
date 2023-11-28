@@ -1,0 +1,40 @@
+<odoo>
+    <record id="resource_calendar_attendance_form_extended" model="ir.ui.view">
+        <field name="name">calendar attendance form extended</field>
+        <field name="model">resource.calendar</field>
+        <field name="inherit_id" ref="resource.resource_calendar_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='attendance_ids']" position="attributes"> 
+               <attribute name="invisible">True</attribute>
+        </xpath>
+         <xpath expr="//notebook" position="replace"> 
+          <notebook>
+            <page name="labor" string="Horas de labor">
+              <field name="labor_ids">
+                <tree editable="bottom">
+                  <field name="name"/>      
+                  <field name="hour_from" string="Trabajar desde" widget="float_time"/>
+                  <field name="hour_to" string="Trabajar hasta" widget="float_time"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </xpath>
+        </field>
+    </record>
+</odoo>
+<!--              <xpath expr="//field[@name='attendance_ids']" position="attributes">
+   <attribute name="invisible">True</attribute>
+</xpath>
+
+<xpath expr="//field[@name='localidad_id']" position="after">
+    <field name="piso_id"/>
+    
+    
+    
+      <field name="labor_id">
+                <tree editable="bottom">                
+                  <field name="name" />
+                </tree>
+              </field>
+     -->

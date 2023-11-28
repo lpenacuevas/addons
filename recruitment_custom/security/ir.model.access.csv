@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_occupational_group_user,occupational_group_user,model_occupational_group,base.group_user,1,1,1,1
+access_custom_hr_job_user,custom_hr_job_user,model_hr_job,base.group_user,1,1,1,1
+access_cargo_viatico_user,cargo_viatico_user,model_cargo_viatico,base.group_user,1,1,1,1
+access_wizard_user,wizard_user,model_wizard_custom,base.group_user,1,1,1,1

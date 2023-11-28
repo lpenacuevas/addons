@@ -1,0 +1,92 @@
+<odoo>
+    <record id="custom_hr_employee_type" model="ir.ui.view">
+        <field name="name">custom employee type</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']/group/group[@name='active_group']/field[@name='employee_type']" position="replace">
+                <field name="tipo_condicion" widget="many2one_tags" />
+                <field name="tipo_empleado" widget="many2one_tags" />
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/h1[hasclass('d-flex')]/field[@name='name']" position="attributes">
+                <attribute name="placeholder">Nombres</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/h1[hasclass('d-flex')]" position="after">
+                <h1 class="d-flex">
+                    <field name="last_name" placeholder="Apellidos" required="1"/>
+                </h1>
+            </xpath>
+            <xpath expr="//page[@name='public']/div/div[@id='o_work_employee_main']" position="inside">
+                <group string="Informacion laboral">
+                    <div>
+                        <group string="Informacion actual">
+                            <field name="enter_date"/>
+                            <field name="end_date"/>
+                            <field name="years_passed" invisible="1"/>
+                            <field name="months_passed" invisible="1"/>
+                        </group>
+                    </div>
+                    <div>
+                        <group string="Tiempo en otras instituciones del estado">
+                            <field name="other_institution_month"/>
+                            <field name="other_institution_year"/>
+                            <field name="government_years_total" invisible="1"/>
+                            <field name="government_months_total" invisible="1"/>
+                        </group>
+                    </div>
+                </group>
+            </xpath>
+            <field name="department_id" position="replace"/>
+            <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="inside">
+                <field name="department_id" options="{'no_create': True, 'no_create_edit':True}"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- custom resume line -->
+    <record id="custom_hr_resume_form_line" model="ir.ui.view">
+        <field name="name">custom resume form line</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_type_id']" position="before">
+                <field name="cargo" string="Cargo"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="before">
+                <field name="tipo_institucion" string="Tipo institucion"/>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="telefono" string="Telefono"/>
+            </xpath>
+            <xpath expr="//field[@name='display_type']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit List View to Modify it -->
+    <record id="custom_hr_list_view" model="ir.ui.view">
+        <field name="name">Employee List View</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Nombres</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="last_name" string="Apellidos"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Kanban View to Modify it -->
+    <record id="custom_hr_kanban_view" model="ir.ui.view">
+        <field name="name">Employee Kanban View</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_hr_kanban_record')]/div[hasclass('oe_kanban_details')]/div/div/strong/field[@name='name']" position="after">
+                <field name="last_name"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+    <record id="wizard_view_form" model="ir.ui.view">
+        <field name="name">wizard_view_form</field>
+        <field name="model">wizard.custom</field>
+        <field name="arch" type="xml">
+            <form string="wizard_staffaction">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_right">
+                            <field name="date_staff"/>
+                            <field name="action_type_id" widget="many2one_tags" readonly="1"/>
+                            <field name="applicant_id" readonly="1"/>
+                        </group>
+                        <group name="group_left">
+                            <field name="effective_date"/>
+                            <field name="action_detail_id" widget="many2one_tags" />
+                            <field name="departments_id" widget="many2one_tags" required="1"  attrs="{'readonly': [('departments_id', '!=', False)]}"/>
+                            <field name="position_id" widget="many2one_tags" required="1" attrs="{'readonly': [('position_id', '!=', False)]}"/>
+                            <field name="is_created" invisible='1'/>
+                        </group>
+                    </group>
+                    <group name="group_bottom">
+                        <field name="action_motivation"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Cancelar" class="btn btn-secondary" special="cancel"/>
+                    <button name='save_staff_action' string="Guardar e Imprimir" class="btn btn-primary" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
+
+
+
+

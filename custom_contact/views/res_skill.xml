@@ -1,0 +1,128 @@
+<odoo>
+    <!-- Skills -->
+
+    <record id="partner_skill_level_view_tree" model="ir.ui.view">
+        <field name="name">res.skill.level.tree</field>
+        <field name="model">res.skill.level</field>
+        <field name="arch" type="xml">
+            <tree string="Niveles de Habilidades">
+                <field name="name"/>
+                <field name="level_progress" widget="progressbar"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="partner_skill_view_tree" model="ir.ui.view">
+        <field name="name">res.skill.tree</field>
+        <field name="model">res.skill</field>
+        <field name="arch" type="xml">
+            <tree string="Niveles de Habilidades">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="partner_skill_level_view_form" model="ir.ui.view">
+        <field name="name">res.skill.level.level.form</field>
+        <field name="model">res.skill.level</field>
+        <field name="arch" type="xml">
+            <form string="Nivel de Habilidad">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="level_progress" string="Progress (%)"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_skill_view_form" model="ir.ui.view">
+        <field name="name">res.partner.skill.form</field>
+        <field name="model">res.partner.skill</field>
+        <field name="arch" type="xml">
+            <form string="Habilidades">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="skill_type_id"/>
+                            <field
+                                    name="skill_id"
+                                    domain="[('skill_type_id', '=', skill_type_id)]"
+                                    options="{'no_create_edit':True}"/>
+                        </group>
+                        <group>
+                            <field name="skill_level_id" domain="[('skill_type_id', '=', skill_type_id)]"/>
+                            <field name="level_progress" widget="progressbar"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_skill_view_form" model="ir.ui.view">
+        <field name="name">res.skill.form</field>
+        <field name="model">res.skill</field>
+        <field name="arch" type="xml">
+            <form string="Habilidades">
+                <sheet>
+                    <field name="name"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_skill_type_view_tree" model="ir.ui.view">
+        <field name="name">res.skill.type.tree</field>
+        <field name="model">res.skill.type</field>
+        <field name="arch" type="xml">
+            <tree string="Tipos de Habilidades">
+                <field name="name"/>
+                <field name="skill_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_skill_type_view_form" model="ir.ui.view">
+        <field name="name">res.skill.type.form</field>
+        <field name="model">res.skill.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Habilidad">
+                <field name="id" invisible="1"/>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.j. Lenguajes" required="True"/>
+                        </h1>
+                    </div>
+                    <group string="Habilidades">
+                        <field name="skill_ids" nolabel="1" context="{'default_skill_type_id': id}">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Niveles">
+                        <field name="skill_level_ids" nolabel="1" context="{'default_skill_type_id': id}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_skill_type_action" model="ir.actions.act_window">
+        <field name="name">Tipo de Habilidades</field>
+        <field name="res_model">res.skill.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="partner_skill_type_menu"
+            name="Habilidades"
+            action="res_skill_type_action"
+            parent="contacts.res_partner_menu_config"
+            sequence="25"
+            />
+</odoo>
