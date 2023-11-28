@@ -20,30 +20,35 @@ class visitantes(models.Model):
     
     document = fields.Char("Documento")
     visitor = fields.Char("Visitante")
-    date = fields.Datetime("Fecha")
+    date = fields.Datetime("Fecha") # TODO: Cambiar a tipo Date y hacer que tome la fecha automaticamente.
 
     entry_date_time = fields.Datetime(
         "Hora de entrada",
-        default=lambda self: fields.Datetime.now())
+        default=lambda self: fields.Datetime.now()) # TODO: Modificar para que solo muestre la hora.
 
-    employee_id = fields.Many2one("res.partner", string="Empleado", required=True)
-
-    #unit = fields.Char(String="Unidad", related="employee_id.unit")
+    employee_id = fields.Many2one("hr.employee", string="Empleado", required=True)
 
     unit = fields.Char("Unidad")
 
     floor = fields.Integer("Piso")
+
+    # This function set the unit & floor to it's respective fields
+    @api.onchange("employee_id")
+    def change_fields(self):
+        if self.employee_id:
+            self.unit = self.employee_id.department_id.name
+            self.floor = self.employee_id.department_id.piso_id.numero
+
+    # TODO: Crear una función que extraiga la fecha y la hora del campo create_date y los setee como campos aparte en campos date & hour
+    # TODO: Crear una función que calcule la diferencia entra la hora de salida y la hora de entrada.
+    # TODO: 
 
 
     #Hora de salida (Campo de salida)
     # departure_date_time = fields.Datetime(
     #     "Hora de salida",
     #     default=lambda self: fields.Datetime.now())
-
-    # Time will be a calculated field between departure_date_time - entry_date_time
-    #time = fields.Datetime()
-
-    #name = fields.Char("Cedula")
+    #Time will be a calculated field between departure_date_time - entry_date_time
     
 
     

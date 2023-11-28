@@ -28,7 +28,6 @@
         'data/data_jce.xml',
         'views/visitantes_menu.xml',
         'views/visitantes_view.xml',
-       
     ],
     "application": True,
     #installable
