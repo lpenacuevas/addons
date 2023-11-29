@@ -31,17 +31,10 @@ class visitantes(models.Model):
 
     
     
-    # start = fields.Datetime(
-    #     'Start', required=True, tracking=True, default=fields.Date.today,
-    #     help="Start date of an event, without time for full days events", readonly=True)
-    
-    # stop = fields.Datetime(
-    #     'Stop', required=True, tracking=True, default=lambda self: fields.Datetime.today() + timedelta(hours=1),
-    #     compute='_compute_stop', readonly=True, store=True,
-    #     help="Stop date of an event, without time for full days events")
+  
     
     
-    # duration = fields.Float('Duration',  store=True, readonly=False)
+
     
     duration = fields.Float('Duration', store=True, compute='_compute_duration', readonly=False)
     # invoice_line_ids = fields.One2many('account.move.line', 'move_id', string='Invoice lines',
@@ -49,19 +42,7 @@ class visitantes(models.Model):
     #     domain=[('exclude_from_invoice_tab', '=', False)],
     #     states={'draft': [('readonly', False)]})
     
-    
-    # @api.depends('create_date', 'write_date')
-    # def _compute_dates(self):   
-    #     for meeting in self:
-    #         _logger.info(f"{self.create_date.date() | meeting.write_date}")
-    #         if meeting.create_date and meeting.write_date:
-    #             # meeting.start = self.create_date.date()
-    #             # meeting.stop = self.write_date.date() if meeting.write_date else self.create_date.date()
-    #             _logger.info("DATE")
-    #         else:
-    #             meeting.create_date = False
-    #             meeting.write_date = False
-    
+
     @api.depends('write_date', 'create_date')
     def _compute_duration(self):
         for event in self:
@@ -76,21 +57,7 @@ class visitantes(models.Model):
             return duracion
         
 
-    # @api.depends('create_date', 'duration')
-    # def _compute_stop(self):
-    #     # stop and duration fields both depends on the start field.
-    #     # But they also depends on each other.
-    #     # When start is updated, we want to update the stop datetime based on
-    #     # the *current* duration. In other words, we want: change start => keep the duration fixed and
-    #     # recompute stop accordingly.
-    #     # However, while computing stop, duration is marked to be recomputed. Calling `event.duration` would trigger
-    #     # its recomputation. To avoid this we manually mark the field as computed.
-    #     duration_field = self._fields['duration']
-    #     self.env.remove_to_compute(duration_field, self)
-    #     for event in self:
-    #         # Round the duration (in hours) to the minute to avoid weird situations where the event
-    #         # stops at 4:19:59, later displayed as 4:19.
-    #         event.stop = event.start and event.start + timedelta(minutes=round((event.duration or 1.0) * 60))
+
           
 
     # #Consulta a api-----------------------------------------
