@@ -23,11 +23,6 @@
                             <!-- <field name="employee_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/> -->
                         </group>
 
-                        <group name="group_rigth">
-                            <field name="unit"/>
-                            <field name="floor"/>
-                        </group>
-
                         <!-- <group name="group_left">
                             <field name="effective_date"/>
                             <field name="name" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
@@ -36,10 +31,14 @@
                         </group> -->
                     </group>
                     <notebook>
-                        <page id="invoice_tab" string="Datos Empleado">
-                            <!-- <field name="invoice_line_ids" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}"> -->
-                            <field name="employee_id" widget="section_and_note_one2many" mode="tree,kanban" />
-
+                        <page string="Datos Empleado">
+                            <group name="group_inner">
+                                <group name="group_inner_left">
+                                    <field name="employee_id"/>
+                                    <field name="unit"/>
+                                    <field name="floor"/>
+                                </group>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
