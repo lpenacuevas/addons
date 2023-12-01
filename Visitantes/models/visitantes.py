@@ -22,12 +22,8 @@ class visitantes(models.Model):
     _rec_name = "document"
     
     document = fields.Char("Documento")
+    
     visitor = fields.Char("Visitante")
-    date = fields.Datetime("Fecha") # TODO: Cambiar a tipo Date y hacer que tome la fecha automaticamente.
-
-    entry_date_time = fields.Datetime(
-        "Hora de entrada",
-        default=lambda self: fields.Datetime.now()) # TODO: Modificar para que solo muestre la hora.
 
     employee_id = fields.Many2one("hr.employee", string="Empleado", required=True)
 
