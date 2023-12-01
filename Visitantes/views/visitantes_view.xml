@@ -17,10 +17,12 @@
                     <group name="group_top">
                         <group name="group_left">
                             <field name="name"></field>
-                            <field name="visitante" string="Nombre" readonly="True"/>
+                            <field name="first_name" string="Nombre" readonly="True"/>
+
                         </group>
                         <group name="group_right">
                             <field name="last_name" string="Apellido" readonly="True"/>
+                            <!-- <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" readonly="true"/> -->
                         </group>
                     </group>
                     <notebook>
@@ -51,6 +53,8 @@
                 <field name="create_date" string="start"/>
                 <field name="write_date" string="stop"/>
                 <field name="duration" widget="float_time" string="Duration" class="oe_inline"/>
+                <field name="state" widget="badge"/>
+                <!-- <field name="category_id" widget="many2many_tags" options="{'color_field': 'color'}"/> -->
             </tree>
         </field>
     </record>
