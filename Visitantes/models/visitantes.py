@@ -51,18 +51,6 @@ class visitantes(models.Model):
     # TODO: Crear una función que extraiga la fecha y la hora del campo create_date y los setee como campos aparte en campos date & hour
     # TODO: Crear una función que calcule la diferencia entra la hora de salida y la hora de entrada.
     # TODO: 
-
-
-    #Hora de salida (Campo de salida)
-    # departure_date_time = fields.Datetime(
-    #     "Hora de salida",
-    #     default=lambda self: fields.Datetime.now())
-    #Time will be a calculated field between departure_date_time - entry_date_time
-    
-    # invoice_line_ids = fields.One2many('account.move.line', 'move_id', string='Invoice lines',
-    #     copy=False, readonly=True,
-    #     domain=[('exclude_from_invoice_tab', '=', False)],
-    #     states={'draft': [('readonly', False)]})
     
 
     @api.depends('write_date', 'create_date')
