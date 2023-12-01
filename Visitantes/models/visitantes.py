@@ -22,7 +22,7 @@ class visitantes(models.Model):
     _rec_name = "document"
     
     document = fields.Char("Documento")
-    
+
     visitor = fields.Char("Visitante")
 
     employee_id = fields.Many2one("hr.employee", string="Empleado", required=True)
@@ -40,22 +40,52 @@ class visitantes(models.Model):
     # This function set the unit & floor to it's respective fields
     @api.onchange("employee_id")
     def change_fields(self):
+        """
+        Update fields based on the selected employee.
+
+        This method is triggered automatically when the "employee_id" field changes.
+        It checks if the "employee_id" has a value and updates the "unit" and "floor" fields
+        based on the corresponding department information of the selected employee.
+
+        Parameters:
+        - self (Recordset): The current recordset.
+
+        Returns:
+        None
+        """
         if self.employee_id:
             self.unit = self.employee_id.department_id.name
-            self.floor = self.employee_id.department_id.piso_id.numero
-
-    # TODO: Crear una función que extraiga la fecha y la hora del campo create_date y los setee como campos aparte en campos date & hour
-    # TODO: Crear una función que calcule la diferencia entra la hora de salida y la hora de entrada.
-    # TODO: 
-    
+            self.floor = self.employee_id.department_id.piso_id.numero   
 
     @api.depends('write_date', 'create_date')
     def _compute_duration(self):
+        """
+        Calculate the duration between 'create_date' and 'write_date' fields using the '_get_duration' function.
+
+        This method is a decorator-dependent function that triggers computation when either 'write_date' or 'create_date' changes.
+        It iterates through each record and sets the 'duration' field based on the result of the '_get_duration' function.
+
+        Parameters:
+        - self (Recordset): The current recordset.
+
+        Returns:
+        None
+        """
         for event in self:
             event.duration = self._get_duration(event.create_date, event.write_date)
-            
+    
     def _get_duration(self, create_date, write_date):
-        """ Get the duration value between the 2 given dates. """
+        """
+        Calculate the duration in hours between 'create_date' and 'write_date'.
+
+        Parameters:
+        - self (Recordset): The current recordset.
+        - create_date (datetime): The date of creation.
+        - write_date (datetime): The date of the last write/update.
+
+        Returns:
+        float: The duration in hours.
+        """
         if not create_date or not write_date:
             return 0
         else:
