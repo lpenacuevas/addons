@@ -4,7 +4,7 @@
         <field name="name">visitantes.action.form</field>
         <field name="model">visitantes</field>
         <field name="arch" type="xml">
-            <form string="Registro de visitantes" edit="false">
+            <form string="Registro de visitantes" edit="true">
                 <header>
                     <!-- <button name="staff_action_done" type="object" string="Confirmar" class="btn btn-primary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
                     <button name="staff_action_cancel" type="object" string="Cancelar" class="btn btn-secondary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
@@ -13,6 +13,7 @@
                     <!-- <button name="button_done" type="object" string="Return" states="open" class="oe_highlight"/> -->
                 </header>
                 <sheet>
+                    <field name="photo" widget='image' class="oe_avatar" options='{"zoom": true, "preview_image":"avatar_128"}'/>
                     <group name="group_top">
                         <group name="group_left">
 
@@ -36,10 +37,13 @@
                             <field name="jobs_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
                         </group> -->
                     </group>
-                    <!-- <group name="group_bottom">
-                        <field name="action_motivation"/>
-                    </group> -->
+                    <notebook>
+                        <page id="invoice_tab" string="Datos Empleado">
+                            <!-- <field name="invoice_line_ids" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}"> -->
+                            <field name="employee_id" widget="section_and_note_one2many" mode="tree,kanban" />
 
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
@@ -57,6 +61,7 @@
         <field name="model">visitantes</field>
         <field name="arch" type="xml">
             <tree edit="false">
+<<<<<<< HEAD
                 <field name="document"/>
                 <!-- <field name="visitor"/>
                 <field name="date"/>
@@ -64,6 +69,12 @@
                 <field name="employee_id"/>
                 <field name="unit"/>
                 <field name="floor"/> -->
+=======
+                <field name="name"/>
+                <field name="create_date" string="start"/>
+                <field name="write_date" string="stop"/>
+                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/>
+>>>>>>> main2
             </tree>
         </field>
     </record>

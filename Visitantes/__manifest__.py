@@ -1,15 +1,12 @@
 
 # -*- coding: utf-8 -*-
 {
-    'name': "Vistitantes ",
-
+    'name': "Visitantes",
     'summary': """
        Gestionar las entradas de los visitantes al mitur """,
-
     'description': """
         crea label de entrada y conecta con el lector
     """,
-
     'author': "Mitur",
     'website': "http://www.yourcompany.com",
 
