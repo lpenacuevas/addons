@@ -59,20 +59,10 @@
         <field name="model">visitantes</field>
         <field name="arch" type="xml">
             <tree edit="false">
-<<<<<<< HEAD
                 <field name="document"/>
-                <!-- <field name="visitor"/>
-                <field name="date"/>
-                <field name="entry_date_time"/>
-                <field name="employee_id"/>
-                <field name="unit"/>
-                <field name="floor"/> -->
-=======
-                <field name="name"/>
-                <field name="create_date" string="start"/>
-                <field name="write_date" string="stop"/>
-                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/>
->>>>>>> main2
+                <field name="create_date" string="Entrada"/>
+                <field name="write_date" string="Salida"/>
+                <field name="duration" widget="float_time" string="Duración" class="oe_inline"/>
             </tree>
         </field>
     </record>
