@@ -1,0 +1,22 @@
+<odoo>
+    <menuitem id="menu_visitantes" name="Registro de visitas" web_icon="visitantes,static/description/icon.png"/>
+
+    <record id="action_stage_visitantes" model="ir.actions.act_window">
+        <field name="name">Estado Visitante</field>
+        <field name="res_model">tags.visitante</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_visitantes" model="ir.actions.act_window">
+        <field name="name">Visitantes</field>
+        <field name="res_model">visitante</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_action_visitante" name="Visitantes" parent="menu_visitantes" action="action_visitantes" sequence="10" />
+
+    <menuitem id="menu_visitantes_configurations" name="Configuracion" parent="menu_visitantes" sequence="13">
+        <menuitem id="menu_second_action_stage_v" name="Estado">
+            <menuitem id="menu_visitante_stage" action="action_stage_visitantes"/>
+        </menuitem>
+    </menuitem>
+</odoo>
