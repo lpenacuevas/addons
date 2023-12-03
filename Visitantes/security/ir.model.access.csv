@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_visitantes_user,visitantes users,model_visitantes,base.group_user,1,1,1,1
+access_visitantes_user,visitantes users,model_visitante,base.group_user,1,1,1,1
+access_stage_visitantes_user,stage visitantes users,model_tags_visitante,base.group_user,1,1,1,1

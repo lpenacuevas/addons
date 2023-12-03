@@ -2,7 +2,7 @@
     <!--Vista de form-->
     <record id="view_visitantes_form" model="ir.ui.view">
         <field name="name">visitantes.action.form</field>
-        <field name="model">visitantes</field>
+        <field name="model">visitante</field>
         <field name="arch" type="xml">
             <form string="Registro de visitantes" edit="true">
                 <header>
@@ -12,24 +12,27 @@
                     <field name="stage_id" widget="statusbar" options="{'clickable': False, 'fold_field': 'fold'}"/> -->
                     <!-- <button name="button_done" type="object" string="Return" states="open" class="oe_highlight"/> -->
                 </header>
-                <sheet>
-                    <field name="photo" widget='image' class="oe_avatar" options='{"zoom": true, "preview_image":"avatar_128"}'/>
-                    <group name="group_top">
-                        <group name="group_left">
-                            <field name="name"></field>
+                <sheet>                    
+                    <field name="potho" widget="image" class="oe_avatar" options="{preview_image:avatar_128}"/>
+                    <div class="oe_title">
+                            <h2 class="d-flex">
+                             <field name="name" placeholder="No cedula" required="True"/>
+                            </h2>
+                    </div>
+                    <group>
+                        <group>                           
                             <field name="first_name" string="Nombre" readonly="True"/>
-
                         </group>
-                        <group name="group_right">
+                        <group>
                             <field name="last_name" string="Apellido" readonly="True"/>
                             <!-- <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" readonly="true"/> -->
                         </group>
                     </group>
                     <notebook>
-                        <page id="invoice_tab" string="Datos Empleado">
-                            <!-- <field name="invoice_line_ids" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}"> -->
-                            <field name="employee_id" widget="section_and_note_one2many" mode="tree,kanban" />
+                        <page id="invoice_tab" string="Empleado a Visitar">
 
+                            <field name="employee_id" widget="section_and_note_one2many" mode="tree,kanban" />
+                            <field name="department_id" widget="section_and_note_one2many" readonly="True" mode="tree,kanban" />
                         </page>
                     </notebook>
                 </sheet>
@@ -41,58 +44,43 @@
             </form>
         </field>
     </record>
-    <!-- Detalle de accion form -->
-
-    <!--list view -->
-    <record id="view_tree_visitantes" model="ir.ui.view">
-        <field name="name">visitantes.List</field>
-        <field name="model">visitantes</field>
+     <record id="view_tree_tags_visitante" model="ir.ui.view">
+        <field name="name">tag visitante list</field>
+        <field name="model">tags.visitante</field>
         <field name="arch" type="xml">
-            <tree edit="false">
-                <field name="name"/>
-                <field name="create_date" string="start"/>
-                <field name="write_date" string="stop"/>
-                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/>
-                <field name="state" widget="badge"/>
-                <!-- <field name="category_id" widget="many2many_tags" options="{'color_field': 'color'}"/> -->
+            <tree editable="bottom">
+              <field name="name"/>
+              <field name="color" widget="color_picker"/>
             </tree>
         </field>
     </record>
-    <!--list view detalle de accion-->
-
+     <record id="visitantes_search_filtro" model="ir.ui.view">
+        <field name="name">visitantes_search</field>
+        <field name="model">visitante</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                 <separator/>
+                <field name="first_name"/> 
+                <field name="state" operator="child_of"/>
+                <separator/>
+                           
+            </search>
+        </field>
+    </record>
+    <!--list view -->
+    <record id="view_tree_visitantes" model="ir.ui.view">
+        <field name="name">visitantes.List</field>
+        <field name="model">visitante</field>
+        <field name="arch" type="xml">
+            <tree edit="false">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="state" string="Estado" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="create_date" string="fecha entrada"/>
+                <field name="write_date" string="fecha salida"/>
+                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/></tree>
+        </field>
+    </record>
+   
 </odoo>
-
-<!--                    <notebook>-->
-<!--                        <page string="Vacaciones">-->
-<!--                            <group>-->
-<!--                                <group name="vacation_left" string="Informacion de vacaciones">-->
-<!--                                    <field name="vacation_start"/>-->
-<!--                                    <field name="vacation_end"/>-->
-<!--                                    <field name="vacation_date_return"/>-->
-<!--                                    <field name="remaining_days" readonly="1"/>-->
-<!--                                </group>-->
-<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
-<!--                            </group>-->
-<!--                        </page>-->
-<!--                        <page string="Promociones">-->
-<!--                            <group>-->
-<!--                                <group name="promotion_left" string="Informacion de promocion">-->
-<!--                                    <field name="new_department_id"/>-->
-<!--                                    <field name="new_position_id"/>-->
-<!--&lt;!&ndash;                                    <field name="new_salary"/>&ndash;&gt;-->
-<!--                                </group>-->
-<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
-<!--                            </group>-->
-<!--                        </page>-->
-<!--                        <page string="Traslados" attrs="{'invisible': [('action_type_id', '!=', 6)]}">-->
-<!--                            <group>-->
-<!--                                <group name="transfer_left" string="Informacion de traslados" required="1">-->
-<!--                                    <field name="new_location_id"/>-->
-<!--                                    <field name="new_department_id"/>-->
-<!--                                    <field name="new_position_id"/>-->
-<!--&lt;!&ndash;                                    <field name="new_salary"/>&ndash;&gt;-->
-<!--                                </group>-->
-<!--                                <group name="vacation_right" string="Informacion adicional"/>-->
-<!--                            </group>-->
-<!--                        </page>-->
-<!--                    </notebook>-->
