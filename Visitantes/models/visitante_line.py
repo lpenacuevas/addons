@@ -14,20 +14,15 @@ class Visitante_Line(models.Model):
         string='Empleado'
         )
 
-    departments_name = fields.Char(        
-        string="Departamento",
-        readonly=True
-    )
+    departments_name = fields.Char(
+        string="Departamento", store=True)
 
     piso_no = fields.Char(
-    string="Piso",
-    readonly=True)
-
+    string="Piso", store=True)
 
     @api.onchange('employee_id')
     def _change_field(self):
         for record in self:
             if record.employee_id:
-                dp = self.env['hr.department'].search([('id', '=', record.employee_id.department_id.id)], limit=1)
-                record.piso_no = dp[0].piso_id.name
-                record.departments_name = dp[0].name
+                record.piso_no = record.employee_id.department_id.piso_id.id
+                record.departments_name = record.employee_id.department_id.name

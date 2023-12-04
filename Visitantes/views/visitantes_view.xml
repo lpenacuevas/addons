@@ -4,17 +4,20 @@
         <field name="name">visitantes.action.form</field>
         <field name="model">visitante</field>
         <field name="arch" type="xml">
-            <form string="Registro de visitantes" edit="true">                
-                <sheet>                    
+            <form string="Registro de visitantes" edit="true">
+                <sheet>
                     <field name="photo" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
-                            <h2 class="d-flex">
-                             <field name="name" placeholder="No cedula" required="True"/>
-                            </h2>
+                        <h2 class="d-flex">
+                            <field name="name" placeholder="No cedula" required="True"/>
+                        </h2>
                     </div>
                     <group>
-                        <group>                           
+                        <group>
                             <field name="first_name" string="Nombre" readonly="True"/>
+                            <field name="employee_id" invisible="1"/>
+                            <field name="departments_id" invisible="1"/>
+                            <field name="piso_id" invisible="1"/>
                         </group>
                         <group>
                             <field name="last_name" string="Apellido" readonly="True"/>
@@ -22,15 +25,15 @@
                         </group>
                     </group>
                     <notebook>
-                     <page name="lines" string="Empleado a visitar">
-              <field name="line_ids" mode="tree,kanban">
-                <tree editable="bottom">
-                    <field name="employee_id" widget="many2one_tags"/>
-                    <field name="departments_name" readonly="True" />
-                    <field name="piso_no" readonly="True"/>                        
-                </tree>
-              </field>
-            </page>
+                        <page name="lines" string="Empleado a visitar">
+                            <field name="line_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="employee_id" widget="many2one_tags"/>
+                                    <field name="departments_name"/>
+                                    <field name="piso_no" />
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
@@ -41,27 +44,28 @@
             </form>
         </field>
     </record>
-     <record id="view_tree_tags_visitante" model="ir.ui.view">
+    <!--View visitantes Tags-->
+    <record id="view_tree_tags_visitante" model="ir.ui.view">
         <field name="name">tag visitante list</field>
         <field name="model">tags.visitante</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-              <field name="name"/>
-              <field name="color" widget="color_picker"/>
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
             </tree>
         </field>
     </record>
-     <record id="visitantes_search_filtro" model="ir.ui.view">
+    <!--search filter view -->
+    <record id="visitantes_search_filtro" model="ir.ui.view">
         <field name="name">visitantes_search</field>
         <field name="model">visitante</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                 <separator/>
-                <field name="first_name"/> 
+                <separator/>
+                <field name="first_name"/>
                 <field name="state" operator="child_of"/>
                 <separator/>
-                           
             </search>
         </field>
     </record>
@@ -71,6 +75,9 @@
         <field name="model">visitante</field>
         <field name="arch" type="xml">
             <tree edit="false">
+                <header>
+                    <button name='change_visitor_status' string="Registrar Salida" type="object" class="btn btn-secondary"/>
+                </header>
                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name='name'/>
@@ -80,11 +87,24 @@
                 <field name="state" string="Estado" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="create_date" string="fecha entrada"/>
                 <!-- <field name="write_date" string="fecha salida"/> -->
-                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/></tree>
+                <field name="duration" widget="float_time" string="Duration" class="oe_inline"/>
+            </tree>
         </field>
     </record>
 
-   
+    <!--View Visitante Lines-->
+    <record id="visitante_lines_view_tree" model="ir.ui.view">
+        <field name="name">visitante_lines_view_tree</field>
+        <field name="model">visitante.line</field>
+        <field name="arch" type="xml">
+            <tree string="Informacion empleado">
+                <field name="employee_id"/>
+                <field name="departments_name"/>
+                <field name="piso_no"/>
+            </tree>
+        </field>
+    </record>
+
 </odoo>
 
 
