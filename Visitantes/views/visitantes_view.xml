@@ -61,6 +61,9 @@
                 <field name="create_date" string="Entrada"/>
                 <field name="write_date" string="Salida"/>
                 <field name="duration" widget="float_time" string="Duración" class="oe_inline"/>
+                <field name="employee_id"/>
+                <field name="unit"/>
+                <field name="floor"/>
             </tree>
         </field>
     </record>
