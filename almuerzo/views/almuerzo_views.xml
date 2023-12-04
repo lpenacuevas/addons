@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <record>
+        <record id="view_almuerzo_form" model="ir.ui.view">
+        <field name="name">almuerzo.action.form</field>
+        <field name="model">almuerzo</field>
+        <field name="arch" type="xml">
+            <form string="Registro de almuerzo" edit="true">
+                <!-- <field name="cedula"/> -->
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="cedula"/>
+                            <field name="name"/>
+                            <field name="last_name"/>
+                            <field name="quantity"/>
+                        </group>
+                        
+                        <group name="group_right">
+                            <field name="from_date"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
 </odoo>
