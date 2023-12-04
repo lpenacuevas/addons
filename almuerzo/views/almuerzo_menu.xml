@@ -1,0 +1,20 @@
+<odoo>
+
+    <!-- for root menu -->
+    <menuitem id="menu_almuerzo" name="Control de almuerzo" web_icon="almuerzo,static/description/icon.png"/>
+
+    <!-- Action almuerzo menu-->
+    <record id="action_almuerzo" model="ir.actions.act_window">
+        <field name="name">Almuerzo</field>
+        <field name="res_model">almuerzo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Configuration menu -->
+    <menuitem id="configuration_menu" name="Configuración" parent="menu_almuerzo" action="action_almuerzo"/>
+
+
+    <!-- <menuitem id="menu_action" name="Configuración" parent="menu_almuerzo" action="action_almuerzo" sequence="10" /> -->
+
+
+</odoo>
