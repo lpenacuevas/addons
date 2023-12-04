@@ -24,15 +24,25 @@ class visitante(models.Model,ImageFromURLMixin):
     last_name = fields.Char("Apellido")  
     photo = fields.Binary("Image")
 
+    line_ids = fields.One2many(
+        'visitante.line',
+        'visitante_id',
+         string="Empleados con visitas")  
 
     employee_id = fields.Many2one(
         'hr.employee',
-        string='employee',
+        string='Empleado'
         )
-    department_id = fields.Many2one(
+
+    departments_id = fields.Many2one(
         'hr.department',
-        related='employee_id.department_id'
+        string="Departamento",
+        readonly=True
     )
+
+    piso_id = fields.Many2one('localidad.piso',
+    string="Piso",
+    readonly=True)
 
     duration = fields.Float('Duration', store=True, compute='_compute_duration', readonly=False)
     color = fields.Integer("Índice de Colores", related="state.color")
@@ -145,6 +155,12 @@ class visitante(models.Model,ImageFromURLMixin):
             vals.update(self._get_updated_vals(vals))
         return super(visitante, self).create(values)
 
+    @api.onchange('employee_id')
+    def _change_field(self):
+        for record in self:
+            if record.employee_id:
+                record.piso_id = record.employee_id.department_id.piso_id.id
+                record.departments_id = record.employee_id.department_id.id
     
     
   
