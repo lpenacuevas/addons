@@ -31,7 +31,7 @@
         'views/staff_menu.xml',
         'views/staff_views.xml',
         'views/applicant_action_view.xml',
-        'reports/staffaction_report.xml'
+        'reports/staff_action_report.xml'
     ],
     "application": True,
     #installable

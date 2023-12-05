@@ -229,8 +229,16 @@
                             </section>
                             <div class="row border">
                                 <div class="col-6">
-                                    <b>12. Sueldo Actual:</b>
-                                    <p></p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>12. Sueldo Actual:</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            RD$<t t-esc="doc.employee_id.salary"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-6 text-right">
                                     <div class="row">

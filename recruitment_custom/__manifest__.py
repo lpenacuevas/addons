@@ -27,7 +27,8 @@
         'views/custom_recuitment_menu.xml',
         'views/custom_recuitment_view.xml',
         'wizard/wizard_view.xml',
-        #'wizard/staff_action_report.xml'
+        #'wizard/staff_action_report.xml',
+        'report/check_list_report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

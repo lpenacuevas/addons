@@ -24,6 +24,9 @@
             <xpath expr="//button[@name='create_employee_from_applicant']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="sheet/group/group/field[@name='user_id']" position="replace">
+                <field name="employee_id"/>
+            </xpath>
             <xpath expr="//button[@name='archive_applicant']" position="after">
                 <button type="object" name="open_wizar" string="Novedad" class="btn-primary"/>
                 <field name="is_created" invisible="1"/>
@@ -32,10 +35,92 @@
                 <label for="job_id" class="oe_edit_only"/>
             </xpath>
             <xpath expr="//div[hasclass('oe_title')]/h1/field[@name='name']" position="replace">
-                <h1><field name="job_id" options="{'no_create': True, 'no_create_edit':True}"/></h1>
+                <h1>
+                    <field name="job_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                </h1>
             </xpath>
             <xpath expr="//sheet/group/group/field[@name='job_id']" position="replace">
-                    <field name="name" string="Asunto" readonly="1"/>
+                <field name="name" string="Asunto" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet/notebook/page" position="after">
+                <page string="Reporte de Entrevista">
+                    <group string="Factores a Evaluar">
+                        <group name="group-left">
+                            <field name="education_level"/>
+                            <field name="experience_level"/>
+                            <field name="behavior_level"/>
+                            <field name="job_level"/>
+                            <field name="working_level"/>
+                            <field name="personal_relationship_level"/>
+                            <field name="goals_level"/>
+                        </group>
+                        <group name="group-right">
+                            <field name="learning_level"/>
+                            <field name="assistance_level"/>
+                            <field name="talking_level"/>
+                            <field name="personal_appearance_level"/>
+                            <field name="ideas_coordination_level"/>
+                            <field name="improving_level"/>
+                            <field name="expectations_level"/>
+                        </group>
+                    </group>
+                    <group string="Informacion de trabajo">
+                        <group name="group-left">
+                            <field name="currently_working"/>
+                            <field name="actual_past_job" readonly="1"/>
+                            <field name="actual_past_position" readonly="1"/>
+                            <field name="actual_past_salary" readonly="1"/>
+                            <h6>
+                                Tiempo que permaneció en la organización:
+                            </h6>
+                            <field name="actual_past_from" readonly="1"/>
+                            <field name="actual_past_to" readonly="1"/>
+                        </group>
+                        <group name="group-right">
+                            <field name="leaving_last_job_reason"/>
+                            <field name="salary_expectation"/>
+                            <field name="time_availability"/>
+                            <field name="applicant_strengths"/>
+                            <field name="improvement_opportunities"/>
+                        </group>
+                    </group>
+                    <group string="Otras informaciones">
+                        <field name="competencies"/>
+                        <field name="another_job_position"/>
+                        <field name="unselected"/>
+                    </group>
+                </page>
+                <page string="Lista de Verificación">
+                    <group>
+                        <group name="group-left">
+                            <field name="map_document" widget="selection_badge"/>
+                            <field name="staff_action" widget="selection_badge"/>
+                            <field name="appointment_def" widget="selection_badge"/>
+                            <field name="appointment_temp" widget="selection_badge"/>
+                            <field name="offer_letter" widget="selection_badge"/>
+                            <field name="supervisor_notf" widget="selection_badge"/>
+                            <field name="partner_identification" widget="selection_badge"/>
+                            <field name="general_information" widget="selection_badge"/>
+                            <field name="partner_resume" widget="selection_badge"/>
+                            <field name="partner_academy_information" widget="selection_badge"/>
+                            <field name="exequatur_copy" widget="selection_badge"/>
+                            <field name="license_copy" widget="selection_badge"/>
+                        </group>
+                        <group name="group-group">
+                            <field name="bank_account" widget="selection_badge"/>
+                            <field name="account_match" widget="selection_badge"/>
+                            <field name="last_institution" widget="selection_badge"/>
+                            <field name="background_certification" widget="selection_badge"/>
+                            <field name="medical_record" widget="selection_badge"/>
+                            <field name="medical_evalutation" widget="selection_badge"/>
+                            <field name="confidential_agreement" widget="selection_badge"/>
+                            <field name="interest_conflict" widget="selection_badge"/>
+                            <field name="bagde_form" widget="selection_badge"/>
+                            <field name="internal_induction" widget="selection_badge"/>
+                            <field name="mitur_ethic" widget="selection_badge"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>
@@ -56,6 +141,15 @@
             <xpath expr="//kanban" position="attributes">
                 <attribute name="create">false</attribute>
             </xpath>
+            <xpath expr="//div[hasclass('o_kanban_card_content')]/t/div[hasclass('row')]/div[hasclass('col-5')]/field[@name='no_of_recruitment']"
+                   position="replace"/>
+<!--            <xpath expr="//div[hasclass('o_kanban_card_content')]/t/div[hasclass('row')]/div[hasclass('col-7')]/button"-->
+<!--                   position="replace">-->
+<!--                <button class="btn btn-primary" name="825" type="action">-->
+<!--                    <field name="new_application_count"/>-->
+<!--                    Nueva(s) Vacante(s)-->
+<!--                </button>-->
+<!--            </xpath>-->
         </field>
     </record>
 
@@ -72,6 +166,20 @@
             </field>
             <xpath expr="//field[@name='department_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="custom_hr_applicant_view_tree" model="ir.ui.view">
+        <field name="name">custom_hr_applicant_view_tree</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="replace">
+                <field name="employee_id" widget="many2one_avatar_employee" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Titulo de vacante</attribute>
             </xpath>
         </field>
     </record>

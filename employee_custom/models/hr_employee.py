@@ -49,6 +49,8 @@ class custom_hr_employee(models.Model):
                                              store=True)
     id_mrh = fields.Integer()
 
+    salary = fields.Float('Salario')
+
     @api.depends('enter_date')
     def _compute_years_months(self):
         for rec in self:

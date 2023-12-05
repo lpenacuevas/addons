@@ -31,7 +31,7 @@ class ApplicantAction(models.Model):
     )
 
     applicant_id = fields.Many2one(
-        'res.partner',
+        'partner.applicant',
         string='Candidato'
     )
 
@@ -43,10 +43,12 @@ class ApplicantAction(models.Model):
     state = fields.Selection(related="stage_id.state")
     id_mrh = fields.Integer()
 
+    salary = fields.Float('Sueldo')
+
     @api.model
     def _default_stage_id(self):
         Stage = self.env["staff.action.stage"]
-        return Stage.search([("state", "=", "new")],
+        return Stage.search([("state", "=", "open")],
                             limit=1)
 
     stage_id = fields.Many2one(

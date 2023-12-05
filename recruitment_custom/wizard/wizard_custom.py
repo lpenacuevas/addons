@@ -25,7 +25,7 @@ class WizardCustom(models.TransientModel):
     )
 
     applicant_id = fields.Many2one(
-        'res.partner', string='Nombre del Candidato', required=True)
+        'partner.applicant', string='Nombre del Candidato', required=True)
 
     departments_id = fields.Many2one(
         'hr.department',
@@ -39,9 +39,11 @@ class WizardCustom(models.TransientModel):
     is_created = fields.Boolean(
         string='Novedad creada')
 
-    def print_staff_action(self):
-        """This return the action of the report for any staff action"""
-        return self.env.ref('staff_action_report').report_action(self)
+    salary = fields.Float('Sueldo')
+
+    # def print_staff_action(self):
+    #     """This return the action of the report for any staff action"""
+    #     return self.env.ref('staff_action_report').report_action(self)
 
     # @api.onchange('effective_date')
     # def validation_date(self):
@@ -63,7 +65,8 @@ class WizardCustom(models.TransientModel):
             'name': self.action_detail_id.id,
             'applicant_id': self.applicant_id.id,
             'departments_id': self.departments_id.id,
-            'jobs_id': self.position_id.id
+            'jobs_id': self.position_id.id,
+            'salary': self.salary
         })
         return
 

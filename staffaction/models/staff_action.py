@@ -50,19 +50,17 @@ class staff_action(models.Model):
         readonly=False
     )
 
+    salary = fields.Float('Sueldo')
+
     @api.onchange('employee_id')
     def _job_field(self):
         for record in self:
             if record.employee_id:
                 id_job = record.employee_id.job_id.id
                 record.jobs_id = id_job
-
-    @api.onchange('employee_id')
-    def _department_field(self):
-        for record in self:
-            if record.employee_id:
                 id_department = record.employee_id.department_id.id
                 record.departments_id = id_department
+                record.salary = record.employee_id.salary
 
     state = fields.Selection(related="stage_id.state", string='Estado')
 
@@ -90,6 +88,7 @@ class staff_action(models.Model):
                 updated_employee.write({
                     'job_id': rec.jobs_id.id,
                     'department_id': rec.departments_id.id,
+                    'salary': rec.salary
                 })
                 message_body = (f"<li><i::marker/>Tipo de acción: {rec.action_type_id.name}<br/>"
                                 f"<li><i::marker/>Detalle de acción: {rec.name.name}<br/>"

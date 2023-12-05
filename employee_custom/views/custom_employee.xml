@@ -39,6 +39,7 @@
             <field name="department_id" position="replace"/>
             <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="inside">
                 <field name="department_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="salary" widget="monetary" placeholder="RD$"/>
             </xpath>
         </field>
     </record>
