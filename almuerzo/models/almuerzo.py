@@ -4,6 +4,7 @@ from odoo import models, fields, api
 class almuerzo(models.Model):
     _name = 'almuerzo'
     _description = 'Modelo de almuerzo'
+    _rec_name = 'cedula'
 
     # name = fields.Char("test")
     
