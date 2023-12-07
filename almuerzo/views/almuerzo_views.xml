@@ -14,8 +14,9 @@
                     </group>
 
                     <group name="group_right">
-                        <field name="from_date"/>
-                        <field name="date_to"/>
+                        <field name="contact_object" invisible="1"/>
+                        <field name="from_date" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
+                        <field name="date_to" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
                     </group>
                 </group>
             </form>
