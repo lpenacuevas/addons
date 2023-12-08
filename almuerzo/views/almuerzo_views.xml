@@ -17,6 +17,7 @@
                         <field name="contact_object" invisible="1"/>
                         <field name="from_date" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
                         <field name="date_to" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
+                        <field name="person_type_id"/>
                     </group>
                 </group>
             </form>

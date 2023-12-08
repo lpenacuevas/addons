@@ -20,6 +20,7 @@ class almuerzo(models.Model):
     date_to = fields.Date("Fecha hasta")
     employee_object = fields.Many2one("hr.employee")
     contact_object = fields.Many2one("res.partner")
+    person_type_id = fields.Many2one("almuerzo.tipo.persona", string="Tipo de persona")
 
 
     @api.onchange("cedula")
@@ -54,7 +55,6 @@ class almuerzo(models.Model):
 #TODO: Crear alerta de acceso permitido (Verde) o denegado (Roja). Si es denegado debe de lanzar una excepcion.
 #TODO: Pantalla principal --> Nombre,apellido 
 #TODO: Cuando es empleado debe de traer el departamento
-#TODO: Crear campo tipo de persona Many2one relacionado con el mantenimiento de tipo de persona
 #TODO: Crear la vista de lista para el registro de cada persona (Nombre, apellido, departamento, tipo de persona). Nota: Si es personal externo el departamento es el dept administrativo
 
 
