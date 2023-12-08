@@ -8,7 +8,7 @@
                 <group name="group_top">
                     <group name="group_left">
                         <field name="cedula"/>
-                        <field name="name"/>
+                        <field name="first_name"/>
                         <field name="last_name"/>
                         <field name="quantity"/>
                     </group>
@@ -30,7 +30,7 @@
         <field name="arch" type="xml">
             <tree edit="false">
                 <field name="cedula"/>
-                <field name="name"/>
+                <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="quantity"/>
                 <field name="from_date"/>

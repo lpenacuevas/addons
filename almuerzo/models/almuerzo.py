@@ -8,13 +8,13 @@ _logger = logging.getLogger(__name__)
 class almuerzo(models.Model):
     _name = 'almuerzo.almuerzo'
     _description = 'Modelo de almuerzo'
-    _rec_name = 'cedula'
 
     # name = fields.Char("test")
     
     cedula = fields.Char("Cedula")
-    name = fields.Char("Nombre")
+    first_name = fields.Char("Nombre")
     last_name = fields.Char("Apellidos")
+    name = fields.Char("Nombre completo", store=True, compute="_compute_rec_name")
     quantity = fields.Integer("Cantidad", default="1")
     from_date = fields.Date("Fecha desde")
     date_to = fields.Date("Fecha hasta")
@@ -32,20 +32,24 @@ class almuerzo(models.Model):
 
             #employee_id_format = #TODO: FORMAT CEDULA
             if employee_obj and rec.cedula:
-                rec.name = employee_obj.name
+                rec.first_name = employee_obj.name
                 rec.last_name = employee_obj.last_name
                 rec.contact_object = False
                 
             
             elif contact_obj and rec.cedula:    
-                rec.name = contact_obj.firstname
+                rec.first_name = contact_obj.firstname
                 rec.last_name = contact_obj.lastname
                 rec.contact_object = contact_obj.id
-                _logger.info(f"-------------{rec.contact_object.id}------------------")
 
-    
+    @api.depends('first_name', 'last_name')
+    def _compute_rec_name(self):
+        """Set rec_name as a full name throughout the name field"""
+        for rec in self:
+            rec.name = f"{self.first_name} {self.last_name}"
+            return rec.name
 
-#TODO: Cambiar rec_name, comcapt name,last_name
+
 #TODO: Crear logica para permitir el almuerzo tomando como parámetros las fechas
 #TODO: Crear alerta de acceso permitido (Verde) o denegado (Roja). Si es denegado debe de lanzar una excepcion.
 #TODO: Pantalla principal --> Nombre,apellido 
