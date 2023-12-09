@@ -8,8 +8,6 @@ _logger = logging.getLogger(__name__)
 class almuerzo(models.Model):
     _name = 'almuerzo.almuerzo'
     _description = 'Modelo de almuerzo'
-
-    # name = fields.Char("test")
     
     cedula = fields.Char("Cedula")
     first_name = fields.Char("Nombre")
@@ -21,6 +19,8 @@ class almuerzo(models.Model):
     employee_object = fields.Many2one("hr.employee")
     contact_object = fields.Many2one("res.partner")
     person_type_id = fields.Many2one("almuerzo.tipo.persona", string="Tipo de persona")
+    unit = fields.Char("Unidad")
+
 
 
     @api.onchange("cedula")
@@ -36,12 +36,14 @@ class almuerzo(models.Model):
                 rec.first_name = employee_obj.name
                 rec.last_name = employee_obj.last_name
                 rec.contact_object = False
-                
+                rec.unit = employee_obj.department_id.name
+
             
             elif contact_obj and rec.cedula:    
                 rec.first_name = contact_obj.firstname
                 rec.last_name = contact_obj.lastname
                 rec.contact_object = contact_obj.id
+
 
     @api.depends('first_name', 'last_name')
     def _compute_rec_name(self):
@@ -54,7 +56,6 @@ class almuerzo(models.Model):
 #TODO: Crear logica para permitir el almuerzo tomando como parámetros las fechas
 #TODO: Crear alerta de acceso permitido (Verde) o denegado (Roja). Si es denegado debe de lanzar una excepcion.
 #TODO: Pantalla principal --> Nombre,apellido 
-#TODO: Cuando es empleado debe de traer el departamento
 #TODO: Crear la vista de lista para el registro de cada persona (Nombre, apellido, departamento, tipo de persona). Nota: Si es personal externo el departamento es el dept administrativo
 
 

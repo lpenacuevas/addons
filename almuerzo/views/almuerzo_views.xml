@@ -10,6 +10,7 @@
                         <field name="cedula"/>
                         <field name="first_name"/>
                         <field name="last_name"/>
+                        <field name="unit"/>
                         <field name="quantity"/>
                     </group>
 
