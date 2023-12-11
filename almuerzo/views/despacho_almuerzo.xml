@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_tree_despacho_almuerzo" model="ir.ui.view">
+        <field name="name">Despacho Almuerzo List</field>
+        <field name="model">almuerzo.despacho.almuerzo</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="cedula"/>
+                <field name="name"/>
+                <field name="unit"/>
+                <field name="create_date" string="Hora"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

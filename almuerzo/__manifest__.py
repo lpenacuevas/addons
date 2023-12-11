@@ -24,7 +24,8 @@
         'views/templates.xml',
         'views/almuerzo_menu.xml',
         'views/almuerzo_views.xml',
-        'views/tipo_persona_views.xml'
+        'views/tipo_persona_views.xml',
+        'views/despacho_almuerzo.xml',
     ],
 
     "application": True,
