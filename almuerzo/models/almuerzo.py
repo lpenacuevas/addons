@@ -43,6 +43,7 @@ class almuerzo(models.Model):
                 rec.first_name = contact_obj.firstname
                 rec.last_name = contact_obj.lastname
                 rec.contact_object = contact_obj.id
+                rec.unit = self.env['hr.department'].search([('id_mrh', '=', '37')]).name
 
 
     @api.depends('first_name', 'last_name')
