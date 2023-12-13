@@ -9,17 +9,17 @@ class almuerzo(models.Model):
     _name = 'almuerzo.almuerzo'
     _description = 'Modelo de almuerzo'
     
-    cedula = fields.Char("Cedula")
+    cedula = fields.Char("Cédula")
     first_name = fields.Char("Nombre")
     last_name = fields.Char("Apellidos")
     name = fields.Char("Nombre completo", store=True, compute="_compute_rec_name")
     quantity = fields.Integer("Cantidad", default="1")
     from_date = fields.Date("Fecha desde")
     date_to = fields.Date("Fecha hasta")
-    employee_object = fields.Many2one("hr.employee")
-    contact_object = fields.Many2one("res.partner")
     person_type_id = fields.Many2one("almuerzo.tipo.persona", string="Tipo de persona")
-    unit = fields.Char("Unidad")
+    contact_object = fields.Many2one("res.partner")
+    unit = fields.Char("Unidad", default= lambda self: self.env['hr.department'].search([('id_mrh', '=', '37')]).name)
+    comment = fields.Char("Comentario")
 
 
 
