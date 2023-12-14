@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class almuerzo(models.Model):
     _name = 'almuerzo.almuerzo'
-    _description = 'Modelo de almuerzo'
+    _description = 'Modelo de administración de almuerzo'
     
     cedula = fields.Char("Cédula")
     first_name = fields.Char("Nombre")
