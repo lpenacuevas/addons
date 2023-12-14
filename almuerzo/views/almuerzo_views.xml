@@ -7,18 +7,19 @@
             <form string="Registro de almuerzo" edit="true">
                 <group name="group_top">
                     <group name="group_left">
-                        <field name="cedula"/>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="unit"/>
-                        <field name="quantity"/>
+                        <field name="cedula" required='True'/>
+                        <field name="first_name" required='True'/>
+                        <field name="last_name" required='True'/>
+                        <field name="unit" required='True'/>
+                        <field name="quantity" required='True'/>
                     </group>
 
                     <group name="group_right">
                         <field name="contact_object" invisible="1"/>
-                        <field name="from_date" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
-                        <field name="date_to" attrs="{'invisible' : [('contact_object', '=', False)]}"/>
-                        <field name="person_type_id"/>
+                        <field name="from_date" required='True'/>
+                        <field name="date_to" required='True'/>
+                        <field name="person_type_id" required='True'/>
+                        <field name="comment"/>
                     </group>
                 </group>
             </form>
