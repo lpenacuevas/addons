@@ -4,7 +4,7 @@
         <field name="model">almuerzo.despacho.almuerzo</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="cedula"/>
+                <field name="cedula" required='True'/>
                 <field name="name"/>
                 <field name="unit"/>
                 <field name="create_date" string="Hora"/>
