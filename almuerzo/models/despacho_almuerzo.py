@@ -65,13 +65,13 @@ class almuerzo_comida(models.Model):
                     rec.first_name = employee_obj.name
                     rec.last_name = employee_obj.last_name
                     rec.unit = employee_obj.department_id.name
-                    self._compute_rec_name()
+                    self._compute_full_name()
                 elif contact_is_allowed_to_eat:
                     rec.first_name = contact_obj.first_name
                     rec.last_name = contact_obj.last_name
                     rec.contact_object = contact_obj.id
-                    rec.unit = self.env['hr.department'].search([('id_mrh', '=', '37')]).name
-                    self._compute_rec_name()
+                    rec.unit = contact_obj.unit.name
+                    self._compute_full_name()
 
 
     @api.depends('first_name', 'last_name')

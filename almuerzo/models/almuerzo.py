@@ -18,7 +18,7 @@ class almuerzo(models.Model):
     date_to = fields.Date("Fecha hasta")
     person_type_id = fields.Many2one("almuerzo.tipo.persona", string="Tipo de persona")
     contact_object = fields.Many2one("res.partner")
-    unit = fields.Char("Unidad", default= lambda self: self.env['hr.department'].search([('id_mrh', '=', '37')]).name)
+    unit = fields.Many2one("hr.department", "Unidad")
     comment = fields.Char("Comentario")
 
 
@@ -39,7 +39,7 @@ class almuerzo(models.Model):
                 rec.first_name = contact_obj.firstname
                 rec.last_name = contact_obj.lastname
                 rec.contact_object = contact_obj.id
-                rec.unit = self.env['hr.department'].search([('id_mrh', '=', '37')]).name
+                rec.unit = self.env['hr.department'].search([('id_mrh', '=', '37')]).id
 
 
     @api.depends('first_name', 'last_name')

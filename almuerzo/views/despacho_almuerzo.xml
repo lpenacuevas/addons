@@ -5,8 +5,8 @@
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="cedula" required='True'/>
-                <field name="name"/>
-                <field name="unit"/>
+                <field name="name" force_save="1"/>
+                <field name="unit" force_save="1"/>
                 <field name="create_date" string="Hora"/>
             </tree>
         </field>

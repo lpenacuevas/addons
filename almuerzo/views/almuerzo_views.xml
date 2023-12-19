@@ -10,7 +10,7 @@
                         <field name="cedula" required='True'/>
                         <field name="first_name" required='True'/>
                         <field name="last_name" required='True'/>
-                        <field name="unit" required='True'/>
+                        <field name="unit" required='True' options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
                         <field name="quantity" required='True'/>
                     </group>
 
