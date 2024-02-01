@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_almuerzo_users,almuerzo users,model_almuerzo_almuerzo,base.group_user,1,1,1,1
+access_almuerzo_despacho_users,despacho almuerzo users,model_almuerzo_despacho_almuerzo,base.group_user,1,1,1,1
+access_almuerzo_tipo_persona,Tipo Persona,model_almuerzo_tipo_persona,base.group_user,1,1,1,1

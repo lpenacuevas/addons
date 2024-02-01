@@ -17,7 +17,7 @@
     'version': '0.1.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','mail', 'hr', 'contacts','localidades'],
+    'depends': ['base','mail', 'hr', 'contacts','localidades','partner_firstname'],
 
     # always loaded
     'data': [
@@ -25,8 +25,8 @@
         'data/data_jce.xml',
         'views/visitantes_menu.xml',
         'views/visitantes_view.xml',
-       
-    ],
+        'reports/visitantes_report.xml'      
+    ],  
     "application": True,
     #installable
     #auto_install

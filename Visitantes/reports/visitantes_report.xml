@@ -1,0 +1,54 @@
+<odoo>
+
+    <template id="visitantes_label_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article">
+                    <div class="oe_structure"/>
+                    <!-- Contenido -->
+                    <div class="col-md-6">
+                        <table style="width:363pt; height:13pt; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt">
+                            <td style="width:33%;" valign="center">
+                                <table style="width:77pt; height:150pt">
+                                    <tr style="height:30%">
+                                        <td align="center" valign="center">
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="paperformat" model="report.paperformat">
+        <field name="name">Custom Paper</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="visitor_report_articule" model="ir.actions.report">
+        <field name="name">Ticket visita</field>
+        <field name="model">visitante</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_file">Visitantes.visitantes_report</field>
+        <field name="report_name">Visitantes.visitantes_label_report</field>
+        <field name="binding_model_id" ref="model_visitante"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="Visitantes.paperformat"/>
+
+    </record>
+
+</odoo>

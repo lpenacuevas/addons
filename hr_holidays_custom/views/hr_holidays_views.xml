@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <record id="hr_leave_type_form_inherit" model="ir.ui.view">
+            <field name="name">hr_leave_type.form</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group[@name='leave_validation']/field[@name='time_type']" position="after">
+                    <field name="type_vacation" required="1"/>
+                </xpath>
+                <xpath expr="//sheet/group/group[@name='leave_validation']/field[@name='time_type']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

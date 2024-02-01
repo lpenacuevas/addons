@@ -13,6 +13,22 @@
             <xpath expr="//field[@name='department_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//sheet/notebook/page/group" position="after">
+                <field name="request_list_details_ids" mode="tree">
+                    <tree editable="bottom">
+                        <field name="employee_id"/>
+                        <field name="department_id" force_save="1"/>
+                        <field name="details"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="duration" invisible="1"/>
+                        <field name="remaining_days" widget="badge" force_save="1"
+                               decoration-danger="duration &lt;= 5"
+                               decoration-warning="6 &lt;= duration &lt;= 20"
+                               decoration-success="duration &gt; 20"/>
+                    </tree>
+                </field>
+            </xpath>
         </field>
     </record>
 
@@ -23,6 +39,18 @@
         <field name="arch" type="xml">
             <xpath expr="//button[@name='create_employee_from_applicant']" position="attributes">
                 <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet/div[hasclass('oe_title')]/h2[hasclass('o_row')]/div/field[@name='partner_name']"
+                   position="after">
+                <!--                <field name="partner_name_id" required="1"/>-->
+                <field name="lastname" placeholder="Apellidos"/>
+                <field name="fullname" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet/div[hasclass('oe_title')]/h2[hasclass('o_row')]/div/field[@name='partner_name']"
+                   position="attributes">
+                <!--                <attribute name="invisible">1</attribute>-->
+                <attribute name="placeholder">Nombres</attribute>
+                <attribute name="required">1</attribute>
             </xpath>
             <xpath expr="sheet/group/group/field[@name='user_id']" position="replace">
                 <field name="employee_id"/>
@@ -41,6 +69,22 @@
             </xpath>
             <xpath expr="//sheet/group/group/field[@name='job_id']" position="replace">
                 <field name="name" string="Asunto" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet/group/group/field[@name='department_id']" position="after">
+                <field name="condition_type_id"/>
+                <field name="employee_type_id"/>
+            </xpath>
+            <xpath expr="//sheet/notebook/page" position="before">
+                <page string="Información personal">
+                    <group string="Información personal">
+                        <group>
+                            <field name="identification"/>
+                            <field name="passport"/>
+                            <field name="country_id"/>
+                            <field name="gender"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
             <xpath expr="//sheet/notebook/page" position="after">
                 <page string="Reporte de Entrevista">
@@ -67,14 +111,14 @@
                     <group string="Informacion de trabajo">
                         <group name="group-left">
                             <field name="currently_working"/>
-                            <field name="actual_past_job" readonly="1"/>
-                            <field name="actual_past_position" readonly="1"/>
-                            <field name="actual_past_salary" readonly="1"/>
+                            <field name="actual_past_job"/>
+                            <field name="actual_past_position"/>
+                            <field name="actual_past_salary"/>
                             <h6>
                                 Tiempo que permaneció en la organización:
                             </h6>
-                            <field name="actual_past_from" readonly="1"/>
-                            <field name="actual_past_to" readonly="1"/>
+                            <field name="actual_past_from"/>
+                            <field name="actual_past_to"/>
                         </group>
                         <group name="group-right">
                             <field name="leaving_last_job_reason"/>
@@ -118,7 +162,12 @@
                             <field name="bagde_form" widget="selection_badge"/>
                             <field name="internal_induction" widget="selection_badge"/>
                             <field name="mitur_ethic" widget="selection_badge"/>
+                            <field name="access_badge" widget="selection_badge"/>
+                            <field name="job_description" widget="selection_badge"/>
                         </group>
+                    </group>
+                    <group>
+                        <field name="comment_for_check"/>
                     </group>
                 </page>
             </xpath>
@@ -143,13 +192,13 @@
             </xpath>
             <xpath expr="//div[hasclass('o_kanban_card_content')]/t/div[hasclass('row')]/div[hasclass('col-5')]/field[@name='no_of_recruitment']"
                    position="replace"/>
-<!--            <xpath expr="//div[hasclass('o_kanban_card_content')]/t/div[hasclass('row')]/div[hasclass('col-7')]/button"-->
-<!--                   position="replace">-->
-<!--                <button class="btn btn-primary" name="825" type="action">-->
-<!--                    <field name="new_application_count"/>-->
-<!--                    Nueva(s) Vacante(s)-->
-<!--                </button>-->
-<!--            </xpath>-->
+            <!--            <xpath expr="//div[hasclass('o_kanban_card_content')]/t/div[hasclass('row')]/div[hasclass('col-7')]/button"-->
+            <!--                   position="replace">-->
+            <!--                <button class="btn btn-primary" name="825" type="action">-->
+            <!--                    <field name="new_application_count"/>-->
+            <!--                    Nueva(s) Vacante(s)-->
+            <!--                </button>-->
+            <!--            </xpath>-->
         </field>
     </record>
 
@@ -180,6 +229,24 @@
             </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="string">Titulo de vacante</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="after">
+                <field name="lastname"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="attributes">
+                <attribute name="string">Nombres</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_applicant_kanban_extended" model="ir.ui.view">
+        <field name="name">hr_applicant.view.kanban.extended</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_content')]/div[hasclass('o_kanban_record_top')]/div[hasclass('o_kanban_record_headings')]/b"
+                   position="inside">
+                <field name="lastname"/>
             </xpath>
         </field>
     </record>

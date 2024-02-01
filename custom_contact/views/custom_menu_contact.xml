@@ -1,17 +1,5 @@
 <odoo>
 
-
-    <record id="action_res_applicant" model="ir.actions.act_window">
-        <field name="name">Candidatos</field>
-        <field name="res_model">partner.applicant</field>
-        <field name="view_mode">kanban,tree,form</field>
-<!--        <field name="view_id" ref="custom_contact.custom_partner_applicant_view"/>-->
-<!--        <field name="domain">[('is_applicant','=', True)]</field>-->
-    </record>
-
-    <menuitem id="menu_action_res_applicant" name="Candidatos" parent="contacts.menu_contacts"
-              action="action_res_applicant" sequence="2"/>
-
     <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
         <field name="sequence">10</field>
     </record>

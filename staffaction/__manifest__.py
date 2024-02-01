@@ -20,7 +20,7 @@
     'version': '0.1.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','mail', 'hr'],
+    'depends': ['base','mail', 'hr','employee_custom'],
 
     # always loaded
     'data': [
@@ -31,7 +31,8 @@
         'views/staff_menu.xml',
         'views/staff_views.xml',
         'views/applicant_action_view.xml',
-        'reports/staff_action_report.xml'
+        'reports/staff_action_report.xml',
+        'data/staff_action_sequence.xml',
     ],
     "application": True,
     #installable

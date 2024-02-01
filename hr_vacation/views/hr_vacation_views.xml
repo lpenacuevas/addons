@@ -1,0 +1,133 @@
+<odoo>
+
+    <record id="hr_vacation_tree_view" model="ir.ui.view">
+        <field name="name">hr_vacation_view_tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <header>
+                    <button name='open_wizard_planning' string="Registrar Vacaciones" type="object"
+                            class="btn btn-secondary"/>
+                </header>
+            </tree>
+        </field>
+    </record>
+
+    <!--    <record id="hr_vacation_view_custom_kanban" model="ir.ui.view">-->
+    <!--        <field name="name">hr.vacation.kanban</field>-->
+    <!--        <field name="model">hr.employee</field>-->
+    <!--        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//kanban" position="before">-->
+    <!--                <header>-->
+    <!--                    <button name='open_wizard_planning' string="Registrar Vacaciones" type="object"-->
+    <!--                        class="btn btn-secondary"/>-->
+    <!--                </header>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <!--     Vacation Planning -->
+
+    <record id="hr_vacation_planning_view_tree" model="ir.ui.view">
+        <field name="name">hr_vacation_planning_view_tree</field>
+        <field name="model">hr.vacation.planning</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" decoration-success="state == 'approved'"
+                  decoration-info="state == 'to approved'"
+                  decoration-muted="state == 'cancel'">
+                <header>
+                    <button name="create_vacation_request" class="btn btn-primary" string="Crear Solicitud"
+                            type="object"/>
+                    <button name="send_internal_notification" class="btn btn-link" string="Enviar Notificacion"
+                            type="object"/>
+                    <button name="send_email_notification" class="btn btn-link" string="Enviar Correo" type="object"/>
+                </header>
+                <field name="employee_id" widget="many2one_avatar_employee"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="date_return"/>
+                <field name="vacation_time"/>
+                <field name="coach_id"/>
+                <field name="state" decoration-success="state == 'approved'"
+                       decoration-info="state == 'to approved'"
+                       decoration-muted="state == 'cancel'"
+                       widget="badge"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_vacation_holiday_view_search" model="ir.ui.view">
+        <field name="name">hr_vacation_holiday_search</field>
+        <field name="model">hr.vacation.planning</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Mi planificación" name="my_planning" domain="[('create_uid', '=', uid)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--    Holidays -->
+    <record id="hr_vacation_holiday_view_tree" model="ir.ui.view">
+        <field name="name">hr_vacation_holiday_view_tree</field>
+        <field name="model">hr.vacation.holiday</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" width="50"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Plan -->
+
+    <record id="hr_vacation_plan_view_tree" model="ir.ui.view">
+        <field name="name">hr_vacation_plan_view_tree</field>
+        <field name="model">hr.vacation.plan</field>
+        <field name="arch" type="xml">
+            <tree string="hr_vacation_plan_tree" create="false">
+                <field name="date" width="25"/>
+                <field name="employee_id" width="25" widget="many2one_avatar_employee"/>
+                <field name="taken" width="25"/>
+                <field name="available" width="25"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--     Vacation Request -->
+
+    <record id="hr_vacation_request_view_tree" model="ir.ui.view">
+        <field name="name">hr_vacation_request_view_tree</field>
+        <field name="model">vacation.request</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <header>
+                    <button name="create_staff_from_request" type="object" string="Crear novedad"
+                            class="btn btn-primary"/>
+                </header>
+                <field name="employee_id" widget="many2one_avatar_employee"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="date_return"/>
+                <field name="vacation_time"/>
+                <field name="coach_id"/>
+                <field name="state" decoration-success="state == 'approved'"
+                       decoration-warning="state == 'to approved'"
+                       widget="badge"/>
+                <button string="Confirmar" name="action_confirm" type="object" icon="fa-thumbs-up"
+                        states="to approved"/>
+                <button string="Rechazar" name="action_refuse" type="object" icon="fa-times" states="to approved"/>
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

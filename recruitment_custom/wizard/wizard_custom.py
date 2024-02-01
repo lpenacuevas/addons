@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 
 class WizardCustom(models.TransientModel):
@@ -10,7 +11,7 @@ class WizardCustom(models.TransientModel):
 
     date_staff = fields.Date('Fecha de accion', required=True)
     effective_date = fields.Date('Fecha efectividad', required=True)
-    action_motivation = fields.Text('Motivo de accion', required=True)
+    action_motivation = fields.Text('Motivo de accion')
     action_type_id = fields.Many2one(
         "action.type",
         string='Tipo de accion',
@@ -24,8 +25,10 @@ class WizardCustom(models.TransientModel):
         required=True
     )
 
-    applicant_id = fields.Many2one(
-        'partner.applicant', string='Nombre del Candidato', required=True)
+    name = fields.Char('Nombres', required=True)
+    lastname = fields.Char('Apellidos', required=True)
+
+    # applicant_id = fields.Many2one('partner.applicant', string='Nombre del Candidato', required=True)
 
     departments_id = fields.Many2one(
         'hr.department',
@@ -37,20 +40,29 @@ class WizardCustom(models.TransientModel):
         string="Cargo",
     )
     is_created = fields.Boolean(
-        string='Novedad creada')
+        string='Novedad creada', copy=False, default=False)
 
     salary = fields.Float('Sueldo')
 
-    # def print_staff_action(self):
-    #     """This return the action of the report for any staff action"""
-    #     return self.env.ref('staff_action_report').report_action(self)
+    condition_type_id = fields.Many2one(
+        "condition.types",
+        string='Tipo de condicion'
+    )
+    employee_type_id = fields.Many2one(
+        "employee.types",
+        string="Tipo de empleado"
+    )
 
-    # @api.onchange('effective_date')
-    # def validation_date(self):
-    # """This show the user they need to use an effective date greater than the date of the action"""
-    # for rec in self:
-    #     if rec.effective_date > rec.date_staff:
-    #       raise UserError("La fecha efectiva necesita ser mayor a la fecha de creación de la novedad")
+    identification = fields.Char(string='Nº identificación')
+    passport = fields.Char(string='Nº Pasaporte')
+    country_id = fields.Many2one('res.country', string='País de nacimiento')
+    gender = fields.Selection(
+        string='Género',
+        selection=[('male', 'Masculino'),
+                   ('female', 'Femenino'), ('other', 'Otro')])
+
+    sequence = fields.Char(string='No. de accion ', required=True, copy=False, readonly=True, index=True,
+                           default=lambda self: self.env['ir.sequence'].next_by_code('staff.action') or _('New'))
 
     def save_staff_action(self):
         self.is_created = True
@@ -62,11 +74,16 @@ class WizardCustom(models.TransientModel):
             'effective_date': self.effective_date,
             'action_motivation': self.action_motivation,
             'action_type_id': self.action_type_id.id,
-            'name': self.action_detail_id.id,
-            'applicant_id': self.applicant_id.id,
+            'action_detail': self.action_detail_id.id,
+            # 'applicant_name_id': self.applicant_id.name,
             'departments_id': self.departments_id.id,
             'jobs_id': self.position_id.id,
-            'salary': self.salary
+            'salary': self.salary,
+            'sequence': self.sequence,
+            'name': self.name,
+            'lastname': self.lastname,
+            'condition_type_id': self.condition_type_id.id,
+            'employee_type_id': self.employee_type_id.id
         })
         return
 
@@ -75,3 +92,17 @@ class WizardCustom(models.TransientModel):
         for rec in self:
             if rec.date_staff > rec.effective_date:
                 raise UserError('La fecha efectiva debe ser mayor o igual a la fecha de la accion')
+
+    def print_action_minister(self):
+        return {
+            'type': 'ir.actions.report',
+            'report_name': 'recruitment_custom.staff_action_report_minister',
+            'report_type': 'qweb-pdf',
+        }
+
+    def print_action_rh(self):
+        return {
+            'type': 'ir.actions.report',
+            'report_name': 'recruitment_custom.staff_action_report_rh',
+            'report_type': 'qweb-pdf',
+        }

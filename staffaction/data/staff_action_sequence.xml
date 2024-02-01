@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="staff_action_sequence" model="ir.sequence">
+            <field name="name">StaffSequence</field>
+            <field name="code">staff.action</field>
+            <field name="prefix" eval="'%(year)s-' % {'year': datetime.now().year}"/>
+            <field name="padding">6</field>
+        </record>
+    </data>
+</odoo>

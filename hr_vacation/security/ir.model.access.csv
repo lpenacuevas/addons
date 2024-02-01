@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_vacation,hr_vacationUser,model_hr_employee,base.group_user,1,1,1,1
+access_hr_vacation_wizard,hr_vacation_wizardUser,model_hr_vacation_wizard,base.group_user,1,1,1,1
+access_hr_vacation_planning,hr_vacation_planningUser,model_hr_vacation_planning,base.group_user,1,1,1,1
+access_hr_vacation_holiday,hr_vacation_holidayUser,model_hr_vacation_holiday,base.group_user,1,1,1,1
+access_hr_vacation_plan,hr_vacation_planUser,model_hr_vacation_plan,base.group_user,1,1,1,1
+access_staff_planning_wizard,staff_planning_wizardUser,model_staff_planning_wizard,base.group_user,1,1,1,1
+access_vacation_request,vacation_requestUser,model_vacation_request,base.group_user,1,1,1,1
+access_hr_vacation_stage,hr_vacation_stageUser,model_hr_vacation_stage,base.group_user,1,1,1,1

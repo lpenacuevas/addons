@@ -11,9 +11,36 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_posiciones_group" name="Parametros de Cargos" parent="hr_recruitment.menu_hr_recruitment_configuration">
+    <menuitem id="menu_posiciones_group" name="Parametros de Cargos"
+              parent="hr_recruitment.menu_hr_recruitment_configuration">
         <menuitem id="model_menu_action_ocupational" action="action_ocupational_group"/>
         <menuitem id="model_menu_action_position" action="action_posiciones_group"/>
     </menuitem>
 
+    <!--    <record id="action_res_applicant" model="ir.actions.act_window">-->
+    <!--        <field name="name">Candidatos</field>-->
+    <!--        <field name="res_model">partner.applicant</field>-->
+    <!--        <field name="view_mode">kanban,tree,form</field>-->
+    <!--    </record>-->
+
+    <!--    <menuitem id="menu_action_res_applicant" name="Candidatos" parent="hr_recruitment.menu_hr_recruitment_root"-->
+    <!--              action="action_res_applicant" sequence="5"/>-->
+
+
+    <record id="hr_recruitment.menu_crm_case_categ0_act_job" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <menuitem name="Solicitudes" parent="hr_recruitment.menu_hr_recruitment_root" id="menu_hr_job_position_custom"
+              action="hr_recruitment.action_hr_job" sequence="1"/>
+
+    <menuitem
+            name="Banco elegible"
+            parent="hr_recruitment.menu_hr_recruitment_root"
+            id="menu_crm_case_categ_all_app_custom" action="hr_recruitment.crm_case_categ0_act_job" sequence="2"/>
+
+
 </odoo>
+
+

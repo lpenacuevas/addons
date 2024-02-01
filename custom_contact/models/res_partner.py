@@ -10,8 +10,6 @@ class ResPartner(models.Model):
 
     reference_spot = fields.Char('Punto de Referencia')
 
-    applicant_id = fields.Many2one('partner.applicant', 'Candidato relacionado')
-
     def compute_applicant_from_partner(self):
         excluded_fields = [
             '__last_update', 'create_date', 'write_date', 'id', 'display_name',
@@ -22,7 +20,7 @@ class ResPartner(models.Model):
         for field_name, field_value in self._fields.items():
             if field_name not in excluded_fields:
                 if field_name in applicant_fields:
-                    context['default_res_partner_id'] = self.id
+                    context['default_applicant_id'] = self.id
                     if isinstance(field_value, fields.Many2one):
                         related_object = getattr(self, field_name)
                         context[f'default_{field_name}'] = related_object.id if related_object else False

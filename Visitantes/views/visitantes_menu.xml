@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="menu_visitantes" name="Registro de visitas" web_icon="visitantes,static/description/icon.png"/>
+    <menuitem id="menu_visitantes" name="Registro de visitas" web_icon="Visitantes,static/description/icon.png"/>
 
     <record id="action_stage_visitantes" model="ir.actions.act_window">
         <field name="name">Estado Visitante</field>
@@ -9,6 +9,7 @@
     <record id="action_visitantes" model="ir.actions.act_window">
         <field name="name">Visitantes</field>
         <field name="res_model">visitante</field>
+        <field name="context">{'search_default_group_inside': 1}</field>
         <field name="view_mode">tree,form</field>
     </record>
 

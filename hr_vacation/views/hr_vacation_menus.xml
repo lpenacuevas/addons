@@ -1,0 +1,70 @@
+<odoo>
+    <menuitem id="hr_vacation_menu" name="Registro de Vacaciones" web_icon="hr_vacation,static/description/icon.png"/>
+
+
+    <record id="action_hr_vacation" model="ir.actions.act_window">
+        <field name="name">Mi personal</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,kanban</field>
+        <field name="domain">[('coach_id.user_id','=',uid)]</field>
+    </record>
+
+    <menuitem id="menu_action_hr_vacation" name="Registro de Vacaciones" parent="hr_vacation_menu" action="action_hr_vacation"
+              sequence="12"/>
+
+    <!--    Vacation Request -->
+    <record id="action_vacation_request" model="ir.actions.act_window">
+        <field name="name">Solicitudes</field>
+        <field name="res_model">vacation.request</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_action_vacation_request" name="Solicitudes de vacaciones" parent="hr_vacation_menu" action="action_vacation_request"
+              sequence="12" groups="hr_vacation.vacation_group_admin"/>
+
+
+    <!--    Hr Vacation Planning -->
+
+    <record id="action_hr_vacation_planning" model="ir.actions.act_window">
+        <field name="name">Planificación anual de vacaciones</field>
+        <field name="res_model">hr.vacation.planning</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_my_planning': 1}</field>
+    </record>
+
+    <menuitem id="menu_action_hr_vacation_planning" name="Planificación" parent="hr_vacation_menu"
+              action="action_hr_vacation_planning"
+              sequence="15"/>
+
+    <!--    Settings-->
+
+    <record id="action_hr_vacation_holiday" model="ir.actions.act_window">
+        <field name="name">Días festivos públicos</field>
+        <field name="res_model">hr.vacation.holiday</field>
+        <field name="view_mode">tree</field>
+    </record>
+    <record id="action_hr_vacation_stage" model="ir.actions.act_window">
+        <field name="name">Estados</field>
+        <field name="res_model">hr.vacation.stage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_hr_vacation_plan" model="ir.actions.act_window">
+        <field name="name">Plan</field>
+        <field name="res_model">hr.vacation.plan</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_configuration_hr_holiday" name="Configuración" parent="hr_vacation_menu" sequence="21">
+        <menuitem id="menu_config_holiday" name="Días festivos públicos">
+            <menuitem id="menu_action_vacation_holiday" action="action_hr_vacation_holiday"/>
+        </menuitem>
+         <menuitem id="menu_config_stage" name="Etapas de planeación">
+            <menuitem id="menu_action_vacation_stage" action="action_hr_vacation_stage"/>
+        </menuitem>
+        <menuitem id="menu_config_plan" name="Vacaciones">
+            <menuitem id="menu_action_vacation_plan" action="action_hr_vacation_plan"/>
+        </menuitem>
+    </menuitem>
+
+</odoo>

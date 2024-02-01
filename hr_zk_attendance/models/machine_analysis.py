@@ -48,7 +48,7 @@ class ZkMachine(models.Model):
                                   string='Punching Type')
 
     attendance_type = fields.Selection([('1', 'Finger'),
-                                        ('15', 'Face'),
+                                        ('16', 'Face'),
                                         ('2','Type_2'),
                                         ('3','Password'),
                                         ('4','Card')], string='Category')
@@ -65,7 +65,7 @@ class ReportZkDevice(models.Model):
     punching_day = fields.Datetime(string='Date')
     address_id = fields.Many2one('res.partner', string='Working Address')
     attendance_type = fields.Selection([('1', 'Finger'),
-                                        ('15', 'Face'),
+                                        ('16', 'Face'),
                                         ('2','Type_2'),
                                         ('3','Password'),
                                         ('4','Card')],

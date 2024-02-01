@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="menu_staffaction" name="Accion de Personal" web_icon="staffaction,static/description/icon.png"/>
+    <menuitem id="menu_staffaction" name="Novedades" web_icon="staffaction,static/description/icon.png"/>
 
 
     <record id="action_staffaction" model="ir.actions.act_window">
@@ -15,29 +15,34 @@
     </record>
 
     <record id="action_type" model="ir.actions.act_window">
-        <field name="name">Action type</field>
+        <field name="name">Tipo de acción</field>
         <field name="res_model">action.type</field>
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record id="action_detail" model="ir.actions.act_window">
-        <field name="name">Action detail</field>
+        <field name="name">Detalle de acción</field>
         <field name="res_model">action.detail</field>
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record id="action_staff_stage" model="ir.actions.act_window">
-        <field name="name">Estado de Accion</field>
+        <field name="name">Estado de acción</field>
         <field name="res_model">staff.action.stage</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_action_staffaction" name="Empleados" parent="menu_staffaction" action="action_staffaction" sequence="10" />
 
-    <menuitem id="menu_action_applicantaction" name="Candidatos" parent="menu_staffaction" action="action_applicant_action" sequence="11" />
+     <menuitem id="menu_action_staffaction_global" name="Novedades" parent="menu_staffaction" sequence="12">
+        <menuitem id="menu_action_staffaction" name="Empleados"
+                  action="action_staffaction"/>
+        <menuitem id="menu_action_applicantaction" name="Candidatos"
+                  action="action_applicant_action"/>
+    </menuitem>
+
     <!--Configuracion -->
     <menuitem id="menu_acction_configurations" name="Configuracion" parent="menu_staffaction" sequence="13">
-        <menuitem id="menu_first_action_type" name="Accion">
+        <menuitem id="menu_first_action_type" name="Acción">
             <menuitem id="model_menu_action_type" action="action_type"/>
             <menuitem id="model_menu_action_detail" action="action_detail"/>
         </menuitem>

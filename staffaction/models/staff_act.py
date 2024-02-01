@@ -11,7 +11,7 @@ class staff_actions(models.Model):
 
     date_staff = fields.Date('Fecha accion', required=True)
     effective_date = fields.Date('Fecha efectividad', required=True)
-    action_motivation = fields.Text('Motivo de accion', required=True)
+    action_motivation = fields.Text('Motivo de accion')
 
     action_type_id = fields.Many2one(
         "action.type",

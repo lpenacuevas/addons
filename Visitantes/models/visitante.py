@@ -39,7 +39,8 @@ class visitante(models.Model, ImageFromURLMixin):
     state = fields.Many2many(
         "tags.visitante",
         default=_default_state
-    )
+    ) 
+
 
     @api.depends('write_date', 'create_date')
     def _compute_duration(self):
@@ -54,8 +55,7 @@ class visitante(models.Model, ImageFromURLMixin):
             duration = (write_date - create_date).total_seconds() / 3600
             return duration
 
-            # Consulta a api-----------------------------------------
-
+            #ApiJCE
     @api.model
     def using_api_external(self, cedula):
         if cedula:
@@ -97,9 +97,11 @@ class visitante(models.Model, ImageFromURLMixin):
             data = dict(partner_json)
             citizen = data["citizenInfo"]
             result["first_name"] = citizen['nombres']
-            result["last_name"] = f"{citizen['apellido1']} {citizen['apellido2']}"
-            result["photo"] = self.convert_image(citizen['foto_encoded'])
-            _logger.warning(result['photo'])
+            if 'apellido2' in data:
+                result["last_name"] = f"{citizen['apellido1']} { citizen['apellido2']}"
+            else:
+                result["last_name"] = f"{citizen['apellido1']}"                               
+            result["photo"] = self.convert_image(citizen['foto_encoded'])            
         return result
 
     @api.model
@@ -107,43 +109,62 @@ class visitante(models.Model, ImageFromURLMixin):
         result = self.env['res.partner'].search([('vat', '=', number)], limit=1)
         return result
 
-    # Actualiza los campos
+
     def _get_updated_vals(self, vals):
         new_vals = {}
-        if any([val in vals for val in ["name", "name"]]):
-            vat = vals["name"] if vals.get("vat") else vals.get("name")
+        if any(val in vals for val in ["name", "name"]):
+            vat = vals.get("vat") or vals.get("name")
             partner = self.with_context(model=self._name).passing_data_contact(vat)
             if partner:
                 for contact in partner:
-                    new_vals["first_name"] = contact.name
+                    new_vals["first_name"] = contact.firstname
+                    new_vals["last_name"] = contact.lastname
+                    new_vals["photo"] = contact.image_1920
 
             else:
                 result = self.with_context(model=self._name).passing_data(vat)
                 if result is not None:
-                    self.env['res.partner'].create({
-                        'name': result["first_name"],
+                    partner_vals = {
+                        'firstname': result.get("first_name"),
+                        'lastname': result.get("last_name"),
                         'vat': vat,
-                        'image_1920': result["photo"]
+                        'image_1920': result.get("photo")
+                }
+                    self.env['res.partner'].create(partner_vals)
+
+                    new_vals.update({
+                        "first_name": result.get("first_name"),
+                        "last_name": result.get("last_name"),
+                        "photo": result.get("photo")
                     })
-                    if "first_name" in result:
-                        new_vals["first_name"] = result["first_name"]
-                    if "last_name" in result:
-                        new_vals["last_name"] = result["last_name"]
-                    if "photo" in result:
-                        new_vals['photo'] = result["photo"]
         return new_vals
+
 
     @api.model_create_multi
     def create(self, values):
         for vals in values:
             vals.update(self._get_updated_vals(vals))
-        return super(visitante, self).create(values)
+        return super(visitante, self).create(values)        
+        
+            
+    
+        
+    @api.onchange('name')
+    def change_auto_field(self):
+        if self.name:
+            for record in self:
+                update_vals = record._get_updated_vals({'name': record.name})
+                record.update(update_vals)
+    
 
     employee_id = fields.Many2one('hr.employee', string='Empleado a visitar')
 
     departments_id = fields.Many2one('hr.department', string="Departamento")
 
     piso_id = fields.Many2one('localidad.piso', string="Piso")
+    
+    
+    
 
     @api.onchange('line_ids')
     def _update_field_from_line_ids(self):
@@ -159,4 +180,11 @@ class visitante(models.Model, ImageFromURLMixin):
             status_tag = rec.env['tags.visitante'].search([('name', '=', 'Salida')], limit=1)
             if record and status_tag:
                 record.write({'state': [(6, 0, [status_tag.id])]})
+                record.write({'state': [(6, 0, [status_tag.id])]})
 
+    def print_visitor_ticket(self):        
+        return {
+            'type': 'ir.actions.report',
+            'report_name': 'Visitantes.visitantes_label_report',
+            'report_type': 'qweb-pdf',
+        }

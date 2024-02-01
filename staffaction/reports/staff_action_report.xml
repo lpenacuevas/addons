@@ -1,0 +1,797 @@
+<odoo>
+
+    <record id="staffaction_paperformat_id" model="report.paperformat">
+        <field name="name">Paper format Staffaction</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">2</field>
+        <field name="margin_left">2</field>
+        <field name="margin_right">2</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!--    STAFF ACTION FOR RRHH-->
+    <template id="staff_action_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article">
+                    <div class="oe_structure"/>
+                    <!-- HEADER -->
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-2">
+                                <img style="width: 100%;"
+                                     src="/staffaction/static/src/img/logo_mitur.png"
+                                     alt=""/>
+                            </div>
+                            <div class="col-8 text-center">
+                                <h2>Dirección de Recursos Humanos</h2>
+                            </div>
+                            <div class="col-2">
+                                <p style="text-transform: uppercase; margin-bottom:10px">
+                                    form-drh-003
+                                </p>
+                                <p>Versión: 01/2019</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 offset-9">
+                                <p style="margin: 10px;">Impreso Por:
+                                    <span t-field="user.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12" style="margin-bottom: 2px ;"/>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center; margin: 5px 0px">
+                                <h3 style="text-transform: uppercase;">Formulario de Acción de
+                                    personal
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12" style="margin-bottom: 2px ;"/>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <!-- TABLE FORM -->
+                    <div class="container" style="font-size:15px">
+                        <!-- primera linea -->
+                        <div class="row">
+                            <div class="col-7 border-secondary border">
+                                <div class="row" style="padding: 2px 0px;">
+                                    <div class="col-3">
+                                        <strong>1. Código</strong>
+                                        <t t-if="doc.employee_id.device_id">
+                                            <p style="margin:10px 20px;">
+                                                <t t-esc="doc.employee_id.device_id"/>
+                                            </p>
+                                        </t>
+                                    </div>
+                                    <div class="col-5" style="text-align: center;">
+                                        <strong>2. Tipo de identificación</strong>
+                                        <t t-if="doc.employee_id.identification_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                cedula de identidad y electoral
+                                            </p>
+                                        </t>
+                                        <t t-if="doc.employee_id.passport_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                pasaporte
+                                            </p>
+                                        </t>
+                                    </div>
+                                    <div class="col-4" style="text-align:center ;">
+                                        <strong>3. Documento No:</strong>
+                                        <t t-if="doc.employee_id.identification_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                <t t-esc="doc.employee_id.identification_id"/>
+                                            </p>
+                                        </t>
+                                        <t t-if="doc.employee_id.passport_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                <t t-esc="doc.employee_id.passport_id"/>
+                                            </p>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5 border-secondary border-top border-right border-bottom">
+                                <div class="row" style="padding-top: 2px;">
+                                    <div class="col-7" style="text-align: right;">
+                                        <p>
+                                            <strong>No. de Acción:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Fecha de Acción:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Fecha de Efectividad:</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-5"
+                                         style="text-align: center; padding-bottom: 10px">
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.sequence"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.date_staff"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.effective_date"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- segunda linea y tercera linea -->
+                        <div class="row">
+                            <div class="col-5 border-secondary  border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px">
+                                        <b>4. Apellidos:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="padding-bottom: 10px">
+                                        <span t-field="doc.employee_id.last_name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px">
+                                        <b>5. Nombres:</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 10px">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-right border-bottom border-left"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px;">
+                                        <b>6. Nacionalidad:</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 10px">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.country_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>7. Cargo:</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 10px">
+                                    <div class="col-12">
+                                        <span t-field="doc.jobs_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>8. Fecha de Ingreso:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.enter_date"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-left border-right border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>9. Sexo:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.gender"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- cuarta linea -->
+                        <div class="row" style="margin-bottom: 0px;">
+                            <div
+                                    class="col-6 border-secondary border-left border-bottom border-right">
+                                <p style="padding-top: 0px;">
+                                    <strong>10. Unidad Administrativa:</strong>
+                                </p>
+                                <p style="text-transform: uppercase;">
+                                    <t t-esc="doc.departments_id.name"/>
+                                </p>
+                            </div>
+                            <div class="col-6 border-secondary border-right">
+                                <p style="padding-top: 5px;">
+                                    <strong>11. Unidad Dependiente:</strong>
+                                </p>
+                                <p style="text-transform: uppercase;">
+                                    <t t-esc="doc.departments_id.parent_id.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- quinta linea -->
+                        <div class="row" style="margin-bottom: 0px;">
+                            <div
+                                    class="col-6 border-secondary border-right border-left border-bottom"
+                                    style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>12. Sueldo Actual:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="padding-top: 10px;">
+                                        RD$
+                                        <t t-esc="doc.employee_id.salary"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                    class="col-6 border-secondary border-right border-top border-bottom"
+                                    style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>
+                                            <strong>13. Antiguedad en el estado:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Ministerio de Turismo:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Otras Instituciones:</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-6" style="text-align: right;">
+                                        <p style="margin-bottom: 40px">
+                                            <span>
+                                                <t t-esc="doc.employee_id.government_time_years"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.government_time_months"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <t t-esc="doc.employee_id.years_passed"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.months_passed"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <t t-esc="doc.employee_id.other_institution_year"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.other_institution_month"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: 0px;">
+                                <p>
+                                    <strong>14. Descripción de Acción de Personal:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom">
+                                <p style="text-transform: uppercase; padding: 0%">
+                                    <t t-esc="doc.action_type_id.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p>
+                                    <strong>15. Motivaciónde la Acción:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p style="text-transform: uppercase; padding: 0%">
+                                    <t t-esc="doc.action_detail.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p>
+                                    <strong>16. Observaciones:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 border-secondary border-right border-left">
+                                <p style="padding-bottom: 90px; font-size: 14px;">
+                                    <t t-esc="doc.action_motivation"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 border-secondary border-right border-left  border-top"
+                                 style="padding-top: ;">
+                                <p>
+                                    <strong>Aprobado</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 4px;">
+                            <div class="col-12 border-secondary border"
+                                 style="padding: 60px; text-align:center">
+                                <p style="margin: 0%;">
+                                    <strong>Yvette Bodden Tejeda</strong>
+                                </p>
+                                <hr class="border-secondary"
+                                    style="width: 40%; margin: 0px 2px 0px 225px"/>
+                                <p>Directora de Recursos Humanos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="margin-top: 10px;">
+                            <p style="font-size: 14px;">
+                                <hr class="border-secondary" style="margin-bottom: 0px"/>
+                                <strong>Creado por:
+                                    <span t-field="doc.create_uid"/>
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="articule_report_view_form" model="ir.actions.report">
+        <field name="name">Reporte de Accion</field>
+        <field name="model">staff.action</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_file">staffaction.staff_action_report</field>
+        <field name="report_name">staffaction.staff_action_report</field>
+        <field name="binding_model_id" ref="model_staff_action"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="staffaction_paperformat_id"/>
+    </record>
+
+
+    <!--    STAFF ACTION FOR MINISTER-->
+    <template id="staff_action_report_latest">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article">
+                    <div class="oe_structure"/>
+                    <!-- HEADER -->
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-2">
+                                <img style="width: 100%;"
+                                     src="/staffaction/static/src/img/logo_mitur.png"
+                                     alt=""/>
+                            </div>
+                            <div class="col-8 text-center">
+                                <h2>Dirección de Recursos Humanos</h2>
+                            </div>
+                            <div class="col-2">
+                                <p style="text-transform: uppercase; margin-bottom:10px">
+                                    form-drh-003
+                                </p>
+                                <p>Versión: 01/2019</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 offset-9">
+                                <p style="margin: 10px;">Impreso Por:
+                                    <span t-field="user.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12" style="margin-bottom: 2px ;"/>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center; margin: 5px 0px">
+                                <h3 style="text-transform: uppercase;">Formulario de Acción de
+                                    personal
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12" style="margin-bottom: 2px ;"/>
+                        </div>
+                        <div class="row">
+                            <div class="border border-secondary col-12"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <!-- TABLE FORM -->
+                    <div class="container" style="font-size:15px">
+                        <!-- primera linea -->
+                        <div class="row">
+                            <div class="col-7 border-secondary border">
+                                <div class="row" style="padding: 2px 0px;">
+                                    <div class="col-3">
+                                        <strong>1. Código</strong>
+                                        <t t-if="doc.employee_id.device_id">
+                                            <p style="margin:10px 20px;">
+                                                <t t-esc="doc.employee_id.device_id"/>
+                                            </p>
+                                        </t>
+                                    </div>
+                                    <div class="col-5" style="text-align: center;">
+                                        <strong>2. Tipo de identificación</strong>
+                                        <t t-if="doc.employee_id.identification_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                cedula de identidad y electoral
+                                            </p>
+                                        </t>
+                                        <t t-if="doc.employee_id.passport_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                pasaporte
+                                            </p>
+                                        </t>
+                                    </div>
+                                    <div class="col-4" style="text-align:center ;">
+                                        <strong>3. Documento No:</strong>
+                                        <t t-if="doc.employee_id.identification_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                <t t-esc="doc.employee_id.identification_id"/>
+                                            </p>
+                                        </t>
+                                        <t t-if="doc.employee_id.passport_id">
+                                            <p style="text-transform: uppercase; margin-top:10px">
+                                                <t t-esc="doc.employee_id.passport_id"/>
+                                            </p>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                    class="col-5 border-secondary border-top border-right border-bottom">
+                                <div class="row" style="padding-top: 2px;">
+                                    <div class="col-7" style="text-align: right;">
+                                        <p>
+                                            <strong>No. de Acción:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Fecha de Acción:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Fecha de Efectividad:</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-5"
+                                         style="text-align: center; padding-bottom: 10px">
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.sequence"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.date_staff"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                        <p style="margin: 0%;">
+                                            <t t-esc="doc.effective_date"/>
+                                        </p>
+                                        <hr class="border-secondary"
+                                            style="margin-top: 0%; width: 125;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- segunda linea y tercera linea -->
+                        <div class="row">
+                            <div class="col-5 border-secondary  border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px">
+                                        <b>4. Apellidos:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.last_name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px">
+                                        <b>5. Nombres:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-right border-bottom border-left"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12" style="margin-bottom:10px">
+                                        <b>6. Nacionalidad:</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 10px">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.country_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>7. Cargo:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="padding-bottom: 10px">
+                                        <span t-field="doc.jobs_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-left border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>8. Fecha de Ingreso:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.enter_date"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 border-secondary border-left border-right border-bottom"
+                                 style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>9. Sexo:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span t-field="doc.employee_id.gender"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- cuarta linea -->
+                        <div class="row" style="margin-bottom: 0px;">
+                            <div
+                                    class="col-6 border-secondary border-left border-bottom border-right">
+                                <p style="padding-top: 0px;">
+                                    <strong>10. Unidad Administrativa:</strong>
+                                </p>
+                                <p style="text-transform: uppercase;">
+                                    <t t-esc="doc.departments_id.name"/>
+                                </p>
+                            </div>
+                            <div class="col-6 border-secondary border-right">
+                                <p style="padding-top: 5px;">
+                                    <strong>11. Unidad Dependiente:</strong>
+                                </p>
+                                <p style="text-transform: uppercase;">
+                                    <t t-esc="doc.departments_id.parent_id.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- quinta linea -->
+                        <div class="row" style="margin-bottom: 0px;">
+                            <div
+                                    class="col-6 border-secondary border-right border-left border-bottom"
+                                    style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>12. Sueldo Actual:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="padding-top: 10px;">
+                                        RD$
+                                        <t t-esc="doc.employee_id.salary"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                    class="col-6 border-secondary border-right border-top border-bottom"
+                                    style="padding-top: 5px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>
+                                            <strong>13. Antiguedad en el estado:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Ministerio de Turismo:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>Otras Instituciones:</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-6" style="text-align: right;">
+                                        <p style="margin-bottom: 40px">
+                                            <span>
+                                                <t t-esc="doc.employee_id.government_time_years"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.government_time_months"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <t t-esc="doc.employee_id.years_passed"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.months_passed"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <t t-esc="doc.employee_id.other_institution_year"/>
+                                                Año(s) y
+                                                <t t-esc="doc.employee_id.other_institution_month"/>
+                                                Mes(es)
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: 0px;">
+                                <p>
+                                    <strong>14. Descripción de Acción de Personal:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom">
+                                <p style="text-transform: uppercase; padding: 0%">
+                                    <t t-esc="doc.action_type_id.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p>
+                                    <strong>15. Motivaciónde la Acción:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p style="text-transform: uppercase; padding: 0%">
+                                    <t t-esc="doc.action_detail.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-bottom"
+                                    style="padding-top: ;">
+                                <p>
+                                    <strong>16. Observaciones:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 border-secondary border-right border-left">
+                                <p style="padding-bottom: 90px; font-size: 14px;">
+                                    <t t-esc="doc.action_motivation"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                    class="col-12 border-secondary border-right border-left  border-top"
+                                    style="padding-top: ;">
+                                <p>
+                                    <strong>Aprobado</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 4px;">
+                            <div class="col-12 border-secondary border"
+                                 style="padding: 60px; text-align:center">
+                                <p style="margin: 0%;">
+                                    <strong>Miguel David Collado Morales</strong>
+                                </p>
+                                <hr class="border-secondary"
+                                    style="width: 40%; margin: 0px 2px 0px 225px"/>
+                                <p>Ministro de Turismo de la República Dominicana</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="margin-top: 10px;">
+                            <p style="font-size: 14px;">
+                                <hr class="border-secondary" style="margin-bottom: 0px"/>
+                                <strong>Creado por:
+                                    <span t-field="doc.create_uid"/>
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="articule_report_view_latest_form" model="ir.actions.report">
+        <field name="name">Reporte de Accion Ministro</field>
+        <field name="model">staff.action</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_file">staffaction.staff_action_report</field>
+        <field name="report_name">staffaction.staff_action_report_latest</field>
+        <field name="binding_model_id" ref="model_staff_action"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="staffaction_paperformat_id"/>
+    </record>
+
+</odoo>

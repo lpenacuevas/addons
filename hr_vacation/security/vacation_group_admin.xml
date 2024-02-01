@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="vacation_group_admin" model="res.groups">
+        <field name="name">Administrador de Vacaciones</field>
+    </record>
+</odoo>

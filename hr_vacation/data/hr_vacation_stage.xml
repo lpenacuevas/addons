@@ -1,0 +1,17 @@
+<odoo noupdate="1">
+    <record id="stage_draft" model="hr.vacation.stage">
+        <field name="name">Por Aprobar</field>
+        <field name="sequence">20</field>
+        <field name="state">to approved</field>
+    </record>
+    <record id="stage_done" model="hr.vacation.stage">
+        <field name="name">Aprobadas</field>
+        <field name="sequence">40</field>
+        <field name="state">approved</field>
+    </record>
+    <record id="stage_cancel" model="hr.vacation.stage">
+        <field name="name">Canceladas</field>
+        <field name="sequence">30</field>
+        <field name="state">cancel</field>
+    </record>
+</odoo>

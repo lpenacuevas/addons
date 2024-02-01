@@ -1,0 +1,15 @@
+<odoo>
+
+    <menuitem id="menu_hr_overtime" name="Labor Extraordinaria" web_icon="hr_overtime,static/description/icon.png"/>
+
+    <record id="action_hr_overtime" model="ir.actions.act_window">
+        <field name="name">Labor Extraordinaria</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <menuitem id="menu_action_hr_overtime" name="" parent="menu_hr_overtime" action="action_hr_overtime"/>
+
+
+</odoo>

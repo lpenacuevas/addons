@@ -9,14 +9,19 @@
                         <group name="group_right">
                             <field name="date_staff"/>
                             <field name="action_type_id" widget="many2one_tags" readonly="1"/>
-                            <field name="applicant_id" readonly="1"/>
+<!--                            <field name="applicant_id" readonly="1"/>-->
+                            <field name="name" readonly="1"/>
+                            <field name="lastname" readonly="1"/>
                         </group>
                         <group name="group_left">
                             <field name="effective_date"/>
                             <field name="action_detail_id" widget="many2one_tags" />
                             <field name="departments_id" widget="many2one_tags" required="1"  attrs="{'readonly': [('departments_id', '!=', False)]}"/>
                             <field name="position_id" widget="many2one_tags" required="1" attrs="{'readonly': [('position_id', '!=', False)]}"/>
+                            <field name="employee_type_id" widget="many2one_tags" required="1" attrs="{'readonly': [('employee_type_id', '!=', False)]}"/>
+                            <field name="condition_type_id" widget="many2one_tags" required="1" attrs="{'readonly': [('condition_type_id', '!=', False)]}"/>
                             <field name="salary" widget="monetary" required="1"/>
+                            <field name="sequence" invisible="1"/>
                             <field name="is_created" invisible='1'/>
                         </group>
                     </group>
@@ -26,7 +31,9 @@
                 </sheet>
                 <footer>
                     <button string="Cancelar" class="btn btn-secondary" special="cancel"/>
-                    <button name='save_staff_action' string="Guardar e Imprimir" class="btn btn-primary" type="object"/>
+                    <button name='print_action_rh' string="Imprimir Accion" class="btn btn-secondary" type="object"/>
+                    <button name='print_action_minister' string="Imprimir Accion Ministro" class="btn btn-secondary" type="object"/>
+                    <button name='save_staff_action' string="Guardar" class="btn btn-primary" type="object"/>
                 </footer>
             </form>
         </field>

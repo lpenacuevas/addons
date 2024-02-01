@@ -1,0 +1,558 @@
+<odoo>
+    <template id="check_list_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article">
+                    <div class="oe_structure"/>
+                    <!-- HEADER -->
+                    <div class="header container border-secondary border row">
+                        <div class="border-secondary border-right col-2">
+                            <img style="width: 100%; padding-top:15px"
+                                 src="/recruitment_custom/static/src/img/logo_mitur.png"
+                                 alt="Mitur"/>
+                        </div>
+                        <div class="col-10">
+                            <h4 style="margin: 0%; text-align: center;">Dirección de Recursos Humanos
+                                <br/>
+                                <h6 style="text-align: center;">Departamento de Reclutamiento y
+                                    Selección
+                                </h6>
+                            </h4>
+                            <div class="row">
+                                <div class="border-secondary border-top col-9" style="text-align: center; padding:0%">
+                                    <h3 style="margin: 2%;">Lista de Verificación</h3>
+                                </div>
+                                <div class="border-secondary border-top border-left col-3"
+                                     style="padding: 10px 0px 0px 0px;">
+                                    <p style="margin: 0px 5px;">Versión:02</p>
+                                    <p style="margin: 0px 5px;">Fecha: 12/09/2022</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- PERSONAL DATA -->
+                    <br/>
+                    <div class="row" style="justify-content: center;">
+                        <div class="col-6" style="margin-right: 10%;">
+                            <p>Nombre del candidato(a):
+                                <span style="text-transform: uppercase; margin-bottom: 5px">
+                                    <t t-esc="doc.fullname"/>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p style="margin-bottom: 5px">Fecha de Efectividad:
+                                <span>
+                                    <t t-esc="doc.availability"/>
+                                </span>
+                            </p >
+                        </div>
+                    </div>
+                    <div class="row" style="justify-content: center;">
+                        <div class="col-6" style="margin-right: 10%;">
+                            <p>Unidad Administrativa:
+                                <span style="text-transform: uppercase;">
+                                    <t t-esc="doc.department_id.name"/>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p>Posición:
+                                <span style="text-transform: uppercase;">
+                                    <t t-esc="doc.job_id.name"/>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- TITLE -->
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <p>Detalle de la Documentación Requerida para el ingreso al MITUR</p>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- TABLE -->
+                    <div class="container-fluid" style="font-size:15px">
+                        <div style="margin: 0px 100px 200px 100px;">
+                            <div class="row">
+                                <div class="border-secondary border col-1" style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">1</p>
+                                </div>
+                                <div class="border-secondary border-top border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Respuesta de No Objeción del Map.
+                                    </p>
+                                </div>
+                                <div class="border-secondary border col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.map_document"/>
+                                    </P>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="border-secondary border-right border-left border-bottom col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">2</p>
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Acción de Personal</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.staff_action"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">3</p>
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Nombramiento Definitivo</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.appointment_def"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">4</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Nombramiento Temporal</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.appointment_temp"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">5</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Carta Oferta Laboral</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.offer_letter"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">6</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Copia Notificación de ingreso al Supervisor
+                                        Inmediato
+                                    </p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.supervisor_notf"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">7</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Copia de Cédula del(a) canditato(a)</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.partner_identification"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">8</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Formulario de Datos Generales</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.general_information"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">9</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Curriculim Vítae</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.partner_resume"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">10</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Copia de Títulos Académicos y/o Certificados
+                                        de
+                                        estudios
+                                    </p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.partner_academy_information"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">11</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Copia de exequátur</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.exequatur_copy"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">12</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Copia de la Licencia</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.license_copy"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">13</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Evidencia Cuenta de Banco Reservas</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.bank_account"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">14</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Verificación cruce de Nóminas Contraria</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.account_match"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">15</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Certificación de Laboró Institución Anterior
+                                    </p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.last_institution"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">16</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Certificación de Buena Conducta</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.background_certification"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">17</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Resultados Analisis Médicos</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.medical_record"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">18</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Evaluación Médica Pre-empleo</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.medical_evalutation"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">19</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Acuerdo de confidencialidad</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.confidential_agreement"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">20</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Formulario Declaración de Conflictos de
+                                        Interes
+                                    </p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.interest_conflict"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">21</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Formulario de Carnet y Acuse de recibido</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.bagde_form"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">22</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Acuse de Inducción</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom  col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.internal_induction"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">23</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Declaración de conocimiento y compromiso de
+                                        cumplimiento del Código de Ética MITUR
+                                    </p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.mitur_ethic"/>
+                                    </P>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">24</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Formulario de tarjeta de acceso</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.access_badge"/>
+                                    </P>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="border-secondary border-bottom border-right border-left col-1"
+                                     style="text-align: center;">
+                                    <p style="margin: 10px 0px 10px 0px;">25</p>
+
+                                </div>
+                                <div class="border-secondary border-bottom col-8" style="text-align:justify">
+                                    <p style="margin: 10px 0px 10px 0px;">Descriptivo de puesto</p>
+                                </div>
+                                <div class="border-secondary border-left border-right border-bottom col-2 "
+                                     style="text-align: center;">
+                                    <P style="margin: 10px 0px 10px 0px;">
+                                        <t t-esc="doc.job_description"/>
+                                    </P>
+                                </div>
+                            </div>
+
+                            <div class="col-12" style="padding: 0%;">
+                                <p style="margin: 12px 0px 12px; text-align: justify;">
+                                    <u>
+                                        <strong>Observaciones</strong>
+                                    </u>
+                                </p>
+                                 <span>
+                                        <t t-esc="doc.comment_for_check"/>
+                                    </span>
+                                 <p style="margin-top: 10px;">
+                                    <strong>Revisado y Firmado
+                                        Reclutamiento_______________________________________________________________
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="check_list_paperformat_id" model="report.paperformat">
+        <field name="name">Paper format Custom</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">2</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="articule_report_view_form" model="ir.actions.report">
+        <field name="name">Lista de Verificacion</field>
+        <field name="model">hr.applicant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_file">recruitment_custom.check_list_report</field>
+        <field name="report_name">recruitment_custom.check_list_report_template</field>
+        <field name="binding_model_id" ref="model_hr_applicant"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="recruitment_custom.check_list_paperformat_id"/>
+    </record>
+
+</odoo>
+

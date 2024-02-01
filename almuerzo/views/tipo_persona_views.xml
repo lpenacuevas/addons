@@ -1,0 +1,11 @@
+<odoo>
+    <record id="view_tree_tipo_persona" model="ir.ui.view">
+        <field name="name">Tipo Persona List</field>
+        <field name="model">almuerzo.tipo.persona</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" required='True'/>
+            </tree>
+        </field>
+    </record>
+</odoo>

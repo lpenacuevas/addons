@@ -1,13 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_custom_res_partner_user,custom_res_partnerUser,model_res_partner,base.group_user,1,1,1,1
-access_partner_family_user,partner_familyUser,model_partner_family,base.group_user,1,1,1,1
-access_partner_job_experience_user,partner_job_experienceUser,model_partner_job_experience,base.group_user,1,1,1,1
-access_res_skill,res_skillUser,model_res_skill,base.group_user,1,1,1,1
-access_res_partner_skill,res_partner_skillUser,model_res_partner_skill,base.group_user,1,1,1,1
-access_res_skill_level,res_skill_levelUser,model_res_skill_level,base.group_user,1,1,1,1
-access_res_skill_type,res_skill_typeUser,model_res_skill_type,base.group_user,1,1,1,1
-access_partner_complementary_experience_user,partner_complementary_experienceUser,model_partner_complementary_experience,base.group_user,1,1,1,1
-access_partner_references_user,partner_referencesUser,model_partner_references,base.group_user,1,1,1,1
-access_action_employee_user,actionEmployeeUser,model_employee_mitur,base.group_user,1,1,1,1
-access_partner_academy_record_user,partner_academy_recordUser,model_partner_academy_record,base.group_user,1,1,1,1
-access_partner_applicant_user,partner_applicantUser,model_partner_applicant,base.group_user,1,1,1,1
+

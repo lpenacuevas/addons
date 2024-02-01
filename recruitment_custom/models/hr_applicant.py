@@ -5,18 +5,52 @@ from odoo.exceptions import ValidationError, UserError
 class custom_hr_applicant(models.Model):
     _inherit = "hr.applicant"
 
-    partner_name = fields.Many2one(
-        comodel_name='partner.applicant',
-        string=' Nombre del candidato',
-        required=True
+    # partner_name_id = fields.Many2one(
+    #     comodel_name='partner.applicant',
+    #     string=' Nombre del candidato',
+    #     required=True
+    # )
+
+    fullname = fields.Char()
+    lastname = fields.Char(string='Apellidos', required=True)
+
+    condition_type_id = fields.Many2one(
+        "condition.types",
+        string='Tipo de condicion'
     )
+    employee_type_id = fields.Many2one(
+        "employee.types",
+        string="Tipo de empleado"
+    )
+
+    identification = fields.Char(string='Nº identificación')
+    passport = fields.Char(string='Nº Pasaporte')
+    country_id = fields.Many2one('res.country', string='País de nacimiento')
+    gender = fields.Selection(
+        string='Género',
+        selection=[('male', 'Masculino'),
+                   ('female', 'Femenino'), ('other', 'Otro')])
+
+    @api.onchange('lastname', 'partner_name')
+    def _check_fullname(self):
+        for rec in self:
+            if rec.partner_name and rec.lastname:
+                rec.fullname = f'{rec.partner_name} {rec.lastname}'
+
+    # @api.onchange('partner_name_id')
+    # def _compute_partner_name(self):
+    #     for rec in self:
+    #         rec.partner_name = rec.partner_name_id.name
 
     employee_id = fields.Many2one('hr.employee', 'Empleado responsable')
 
     @api.onchange('job_id')
     def _compute_name_job(self):
         for rec in self:
-            rec.name = rec.job_id.name
+            if rec.job_id:
+                rec.name = rec.job_id.name
+            else:
+                rec.name = f'{rec.partner_name} {rec.lastname}'
 
     is_created = fields.Boolean(
         string='Se Creo una accion')
@@ -37,9 +71,18 @@ class custom_hr_applicant(models.Model):
             'target': 'new',
             'context': {
                 'default_action_type_id': action_type_lower.id,
-                'default_applicant_id': self.partner_name.id,
+                # 'default_applicant_id': self.partner_name_id.id,
                 'default_departments_id': self.department_id.id,
-                'default_position_id': self.job_id.id
+                'default_position_id': self.job_id.id,
+                'default_salary': self.salary_proposed,
+                'default_name': self.partner_name,
+                'default_lastname': self.lastname,
+                'default_condition_type_id': self.condition_type_id.id,
+                'default_employee_type_id': self.employee_type_id.id,
+                'default_identification': self.identification,
+                'default_passport': self.passport,
+                'default_country_id': self.country_id.id,
+                'default_gender': self.gender,
             }
         }
 
@@ -157,8 +200,8 @@ class custom_hr_applicant(models.Model):
     actual_past_job = fields.Char('Nombre Actual/Ultima:', store=True)
     actual_past_position = fields.Char('Posición actual/Última:', store=True)
     actual_past_salary = fields.Char('Salario Actual/Último:', store=True)
-    actual_past_from = fields.Char('Desde', store=True)
-    actual_past_to = fields.Char('Hasta', store=True)
+    actual_past_from = fields.Date('Desde', store=True)
+    actual_past_to = fields.Date('Hasta', store=True)
 
     leaving_last_job_reason = fields.Char('Razón de salida trabajo actual o último:')
     salary_expectation = fields.Char('Expectativa salarial:')
@@ -282,25 +325,24 @@ class custom_hr_applicant(models.Model):
                    ('No', 'No'),
                    ('N/A', 'N/A')])
     mitur_ethic = fields.Selection(
-        string='Declaración de conocimiento y compromiso de cumplimiento del Códifo de Ética MITUR',
+        string='Declaración de conocimiento y compromiso de cumplimiento del Código de Ética MITUR',
+        selection=[('Si', 'Si'),
+                   ('No', 'No'),
+                   ('N/A', 'N/A')])
+    access_badge = fields.Selection(
+        string='Formulario de tarjeta de acceso',
+        selection=[('Si', 'Si'),
+                   ('No', 'No'),
+                   ('N/A', 'N/A')])
+    job_description = fields.Selection(
+        string='Descriptivo de puesto',
         selection=[('Si', 'Si'),
                    ('No', 'No'),
                    ('N/A', 'N/A')])
 
+    comment_for_check = fields.Char('Observaciones')
+
     """------------------------End Section: Fields for check list------------------------------ """
-
-    @api.onchange('partner_name')
-    def _compute_fields_from_partner(self):
-        for rec in self:
-            partner_job = rec.partner_name.partner_job_ids.filtered(
-                lambda record: record.id == rec.partner_name.partner_job_ids[0].id)
-            if partner_job:
-                rec.actual_past_job = partner_job.name
-                rec.actual_past_position = partner_job.job_position
-                rec.actual_past_salary = partner_job.salary
-                rec.actual_past_from = partner_job.enter_date
-                rec.actual_past_to = partner_job.end_date
-
 
 # 'name': Puedes agregar un nombre descriptivo a la acción que se mostrará en la interfaz de usuario.
 

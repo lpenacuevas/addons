@@ -6,13 +6,16 @@
         <field name="arch" type="xml">
             <form string="Biometric Device">
                 <header>
-                    <button name="clear_attendance" type="object" string="Clear Data" class="oe_highlight" icon="fa-remove " confirm="Are you sure you want to do this?"/>
-                    <button name="download_attendance" type="object" string="Download Data" class="oe_highlight" icon="fa-download" confirm="Are you sure you want to do this?" />
-                    <button name="Try_connect" type="object" string="Try connect" class="oe_highlight" icon="fa-wrench" />
+                    <button name="clear_attendance" type="object" string="Clear Data" class="oe_highlight"
+                            icon="fa-remove " confirm="Are you sure you want to do this?"/>
+                    <button name="download_attendance" type="object" string="Download Data" class="oe_highlight"
+                            icon="fa-download" confirm="Are you sure you want to do this?"/>
+                    <button name="Try_connect" type="object" string="Try connect" class="oe_highlight"
+                            icon="fa-wrench"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <label for="name" />
+                        <label for="name"/>
                         <h1>
                             <field name="name" placeholder="Machine IP"/>
                         </h1>
@@ -61,7 +64,20 @@
         </field>
     </record>
 
-    <menuitem id="zk_machine_menu" parent="hr_attendance.menu_hr_attendance_root" sequence="50" name="Biometric Manager" />
-    <menuitem id="zk_machine_sub_menu" parent="zk_machine_menu" name="Device Configuration" action="zk_machine_action" sequence="1"/>
+    <menuitem id="zk_machine_menu" parent="hr_attendance.menu_hr_attendance_root" sequence="50"
+              name="Dispositivos biométricos"/>
+    <menuitem id="zk_machine_sub_menu" parent="zk_machine_menu" name="Configuración de dispositivos"
+              action="zk_machine_action" sequence="1"/>
+
+
+    <record id="hr_attendance.menu_hr_attendance_kiosk_no_user_mode" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_attendance.menu_hr_attendance_my_attendances" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+    </record>
+
+
 </odoo>
 

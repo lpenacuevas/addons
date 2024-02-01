@@ -1,0 +1,66 @@
+<odoo>
+<<<<<<< Updated upstream
+=======
+<!--    <record id="view_form_overtime" model="ir.ui.view">-->
+<!--        <field name="name">Overtime Form</field>-->
+<!--        <field name="model">hr.overtime</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <group name="group_top">-->
+<!--                        <group name="group_left">-->
+<!--                            <field name="employee_id" options="{'no_create': True, 'no_create_edit':True}"/>-->
+<!--                            <field name="job_id" readonly="1" force_save="1"/>-->
+<!--                            <field name="salario" readonly="1" force_save="1"/>-->
+<!--                            <field name="date_start" readonly="1" force_save="1"/>-->
+<!--                        </group>-->
+<!--                        <group name="group_right">-->
+<!--                            <field name="departament_id" readonly="1" force_save="1"/>-->
+<!--                            <field name="date_end" readonly="1" force_save="1"/>-->
+<!--                            <field name="standard_hours"  force_save="1"/>-->
+<!--                            <field name="extra_hours" invisible="1" force_save="1"/>-->
+<!--                            <field name="total_hours" invisible="1" force_save="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+>>>>>>> Stashed changes
+    <record id="view_tree_overtime" model="ir.ui.view">
+        <field name="name">Overtime List</field>
+        <field name="model">hr.overtime</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="date_start" readonly="1" force_save="1" width="10%"/>
+                <field name="date_end" width="10%"/>
+                <field name="employee_id" options="{'no_create': True, 'no_create_edit':True}" width="15%"/>
+                <field name="job_id" readonly="1" force_save="1" width="10%"/>
+                <field name="departament_id" readonly="1" force_save="1" width="15%"/>
+<<<<<<< Updated upstream
+                <field name="salary" invisible="1" force_save="1" width="10%"/>
+=======
+                <field name="salario" invisible="1" force_save="1" width="10%"/>
+>>>>>>> Stashed changes
+                <field name="standard_hours" readonly="1" force_save="1" width="10%"/>
+                <field name="total_hours" readonly="1" force_save="1" width="10%"/>
+                <field name="extra_hours" readonly="1"  force_save="1" width="10%"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    resource calendar view-->
+
+    <record id="resource_calendar_form_inherit" model="ir.ui.view">
+        <field name="name">resource calendar form inherit</field>
+        <field name="model">resource.calendar</field>
+        <field name="inherit_id" ref="resource.resource_calendar_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='resource_details']/group/field[@name='tz']" position="after">
+                <field name="time_per_week" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo> 

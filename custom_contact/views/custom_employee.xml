@@ -4,22 +4,19 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet/group/group/field[@name='category_id']" position="after">
-                <field name="applicant_id" attrs="{'invisible': [('applicant_id', '=', False)]}"/>
-            </xpath>
-            <xpath expr="//sheet/group/group/field[@name='vat']" position="replace"/>
+<!--            <xpath expr="//sheet/group/group/field[@name='vat']" position="replace"/>-->
             <xpath expr="//sheet/group/group/field[@name='function']" position="replace"/>
             <xpath expr="//sheet/group/group/div[hasclass('o_address_format')]/field[@name='country_id']"
                    position="after">
                 <field name="reference_spot" placeholder="Punto de Referencia"/>
             </xpath>
-            <xpath expr="//sheet" position="before">
-                <header>
-                    <button name='compute_applicant_from_partner' class="btn btn-secondary" string="Crear Candidato"
-                            type="object"
-                            help="Crear candidatos a partir de un contacto"/>
-                </header>
-            </xpath>
+<!--            <xpath expr="//sheet" position="before">-->
+<!--                <header>-->
+<!--                    <button name='compute_applicant_from_partner' class="btn btn-secondary" string="Crear Candidato"-->
+<!--                            type="object"-->
+<!--                            help="Crear candidatos a partir de un contacto"/>-->
+<!--                </header>-->
+<!--            </xpath>-->
         </field>
     </record>
 </odoo>

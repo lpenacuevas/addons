@@ -5,12 +5,15 @@
         <field name="model">applicant.action</field>
         <field name="arch" type="xml">
             <tree create="false" edit="false">
-                <field name="applicant_id" widget="many2one_tags"/>
+<!--                <field name="applicant_id" widget="many2one_tags"/>-->
+<!--                <field name="applicant_name_id"/>-->
+                <field name="name"/>
+                <field name="lastname"/>
                 <field name="date_staff"/>
                 <field name="effective_date"/>
                 <field name="state"/>
                 <field name="action_type_id" widget="many2one_tags"/>
-                <field name="name" widget="many2one_tags"/>
+                <field name="action_detail" widget="many2one_tags"/>
             </tree>
         </field>
     </record>
@@ -21,23 +24,29 @@
         <field name="arch" type="xml">
             <form string="applicant" create="false" edit="false">
                 <header>
+                    <button name="staff_action_done" type="object" string="Confirmar y crear empleado" class="btn btn-primary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
+                    <button name="staff_action_cancel" type="object" string="Cancelar" class="btn btn-secondary" attrs="{'invisible': [('state', '!=', 'open')]}" groups="staffaction.staff_group_admin" />
                     <field name="state" invisible="True"/>
-                    <field name="stage_id" widget="statusbar" options="{'clickable': True, 'fold_field': 'fold'}"/>
-                    <button name="button_done" type="object" string="Return" states="open" class="oe_highlight"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': False, 'fold_field': 'fold'}"/>
                 </header>
                 <sheet>
                     <group name="group_top">
                         <group name="group_right">
                             <field name="date_staff"/>
                             <field name="action_type_id" widget="many2one_tags"/>
-                            <field name="applicant_id" widget="many2one_tags"/>
+<!--                            <field name="applicant_id" widget="many2one_tags"/>-->
+<!--                            <field name="applicant_name_id"/>-->
+                            <field name="name"/>
+                            <field name="lastname"/>
                         </group>
                         <group name="group_left">
                             <field name="effective_date"/>
-                            <field name="name" widget="many2one_tags"/>
+                            <field name="action_detail" widget="many2one_tags"/>
                             <field name="jobs_id" widget="many2one_tags"/>
                             <field name="departments_id" widget="many2one_tags"/>
                             <field name="salary" widget="monetary" required="1"/>
+                            <field name="condition_type_id" widget="many2one_tags"/>
+                            <field name="employee_type_id" widget="many2one_tags"/>
                         </group>
                     </group>
                     <group name="group_bottom">

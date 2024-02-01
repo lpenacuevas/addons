@@ -3,3 +3,14 @@ access_occupational_group_user,occupational_group_user,model_occupational_group,
 access_custom_hr_job_user,custom_hr_job_user,model_hr_job,base.group_user,1,1,1,1
 access_cargo_viatico_user,cargo_viatico_user,model_cargo_viatico,base.group_user,1,1,1,1
 access_wizard_user,wizard_user,model_wizard_custom,base.group_user,1,1,1,1
+access_partner_family_user,partner_familyUser,model_partner_family,base.group_user,1,1,1,1
+access_partner_job_experience_user,partner_job_experienceUser,model_partner_job_experience,base.group_user,1,1,1,1
+access_res_skill,res_skillUser,model_res_skill,base.group_user,1,1,1,1
+access_res_partner_skill,res_partner_skillUser,model_res_partner_skill,base.group_user,1,1,1,1
+access_res_skill_level,res_skill_levelUser,model_res_skill_level,base.group_user,1,1,1,1
+access_res_skill_type,res_skill_typeUser,model_res_skill_type,base.group_user,1,1,1,1
+access_partner_complementary_experience_user,partner_complementary_experienceUser,model_partner_complementary_experience,base.group_user,1,1,1,1
+access_partner_references_user,partner_referencesUser,model_partner_references,base.group_user,1,1,1,1
+access_partner_academy_record_user,partner_academy_recordUser,model_partner_academy_record,base.group_user,1,1,1,1
+access_partner_applicant_user,partner_applicantUser,model_partner_applicant,base.group_user,1,1,1,1
+access_request_list_details_user,request_list_detailsUser,model_request_list_details,base.group_user,1,1,1,1

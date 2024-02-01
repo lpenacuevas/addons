@@ -64,6 +64,6 @@
         <field name="search_view_id" ref="view_zk_report_daily_attendance_search" />
     </record>
 
-    <menuitem id="menu_zk_attendance_view" name="Attendance log" action="action_zk_report_daily_attendance" parent="zk_machine_menu"
+    <menuitem id="menu_zk_attendance_view" name="Registro de asistencia" action="action_zk_report_daily_attendance" parent="zk_machine_menu"
               sequence="2" groups="hr_attendance.group_hr_attendance_user"/>
 </odoo>

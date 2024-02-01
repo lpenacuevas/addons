@@ -14,7 +14,6 @@
     'author': "Mitur",
     'website': "http://www.yourcompany.com",
 
-
     'category': 'Mitur/customized',
     'version': '0.1.0',
     'depends': ['base', 'hr', 'mail', 'hr_recruitment', 'staffaction'],
@@ -27,8 +26,13 @@
         'views/custom_recuitment_menu.xml',
         'views/custom_recuitment_view.xml',
         'wizard/wizard_view.xml',
-        #'wizard/staff_action_report.xml',
-        'report/check_list_report.xml'
+        'report/staff_action_report.xml',
+        'report/check_list_report.xml',
+        'views/partner_family.xml',
+        'views/partner_job_experience.xml',
+        'views/partner_academy_record.xml',
+        'views/res_skill.xml',
+        'views/partner_applicant.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

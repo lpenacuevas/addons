@@ -1,0 +1,42 @@
+<odoo>
+
+    <!-- Action Almuerzo-->
+    <record id="action_almuerzo" model="ir.actions.act_window">
+        <field name="name">Administración de almuerzo</field>
+        <field name="res_model">almuerzo.almuerzo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Tipo Persona -->
+    <record id="action_tipo_persona" model="ir.actions.act_window">
+        <field name="name">Tipo Persona</field>
+        <field name="res_model">almuerzo.tipo.persona</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Action Despacho Almuerzo -->
+    <record id="action_despacho_almuerzo" model="ir.actions.act_window">
+        <field name="name">Despacho Almuerzo</field>
+        <field name="res_model">almuerzo.despacho.almuerzo</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- for root menu -->
+    <menuitem id="menu_almuerzo" name="Control de almuerzo" web_icon="almuerzo,static/description/icon.png">
+
+        <!-- First level menu Despacho Almuerzo -->
+        <menuitem id="menu_despacho_almuerzo" name="Despacho Almuerzo" action="action_despacho_almuerzo" sequence="8"/>
+
+        <!-- First level menu Configuration -->
+        <menuitem id="menu_configuration" name="Configuración" sequence="10">
+            <!-- Inner submenu title Parámetros Generales-->
+            <menuitem id="menu_tipo_persona" name="Parámetros Generales">
+                <!-- Administración Almuerzo Submenu -->
+                <menuitem id="menu_action" name="Administración de almuerzo" action="action_almuerzo"/>
+                <!--Tipo Persona Submenu-->
+                <menuitem id="menu_persona" name="Tipo Persona" action="action_tipo_persona"/>
+            </menuitem>
+        </menuitem>
+    </menuitem>
+
+</odoo>

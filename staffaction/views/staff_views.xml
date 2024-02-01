@@ -21,10 +21,11 @@
                         </group>
                         <group name="group_left">
                             <field name="effective_date"/>
-                            <field name="name" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="action_detail" widget="many2one_tags" options="{'no_create': True, 'no_create_edit':True}"/>
                             <field name="departments_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
                             <field name="jobs_id" widget="many2one_tags" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
                             <field name="salary" widget="monetary" required="1"/>
+                            <field name="sequence" invisible="1"/>
                         </group>
                     </group>
                     <group name="group_bottom">
@@ -77,7 +78,7 @@
                 <field name="effective_date"/>
                 <field name="state"/>
                 <field name="action_type_id"/>
-                <field name="name"/>
+                <field name="action_detail"/>
             </tree>
         </field>
     </record>

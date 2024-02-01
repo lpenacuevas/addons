@@ -2,6 +2,8 @@
 import logging
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
+import datetime
+from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -9,20 +11,21 @@ _logger = logging.getLogger(__name__)
 class staff_action(models.Model):
     _name = 'staff.action'
     _description = 'Accion de personal'
+    _rec_name = 'employee_id'
 
     # _inherits = {"res.partner": "partner_id"}
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     date_staff = fields.Date('Fecha Accion', required=True)
     effective_date = fields.Date('Fecha efectividad', required=True)
-    action_motivation = fields.Text('Motivo de accion', required=True)
+    action_motivation = fields.Text('Motivo de accion')
     action_type_id = fields.Many2one(
         "action.type",
         'Tipo de Accion',
         required=True,
     )
 
-    name = fields.Many2one(
+    action_detail = fields.Many2one(
         'action.detail',
         string='Detalle',
         required=True,
@@ -91,22 +94,27 @@ class staff_action(models.Model):
                     'salary': rec.salary
                 })
                 message_body = (f"<li><i::marker/>Tipo de acción: {rec.action_type_id.name}<br/>"
-                                f"<li><i::marker/>Detalle de acción: {rec.name.name}<br/>"
+                                f"<li><i::marker/>Detalle de acción: {rec.action_detail.name}<br/>"
                                 f"<li><i::marker/>Etapa:\n{rec.stage_id.name}<br/>"
                                 f"<li><i::marker/>Departamento: {rec.departments_id.name}<br/>"
                                 f"<li><i::marker/>Cargo:\n{rec.jobs_id.name}<br/>"
                                 )
                 rec.message_post(body=message_body)
 
+    sequence = fields.Char(string='No. de accion ', required=True, copy=False, readonly=True, index=True,
+                           default=lambda self: _('New'))
+
     @api.model
     def create(self, vals):
+        if vals.get('sequence', 'New') == 'New':
+            vals['sequence'] = self.env['ir.sequence'].next_by_code('staff.action') or 'New'
         res = super(staff_action, self).create(vals)
         for rec in res:
-            if res.departments_id.id == res.employee_id.department_id.id:
+            if rec.departments_id.id == rec.employee_id.department_id.id:
                 message_body = (f"<li><i::marker/>Tipo de acción: {rec.action_type_id.name}<br/>"
-                                f"<li><i::marker/>Detalle de acción: {rec.name.name}<br/>"
+                                f"<li><i::marker/>Detalle de acción: {rec.action_detail.name}<br/>"
                                 f"<li><i::marker/>Etapa:\n{rec.stage_id.name}<br/>")
-                res.message_post(body=message_body)
+                rec.message_post(body=message_body)
         return res
 
     def staff_action_cancel(self):
